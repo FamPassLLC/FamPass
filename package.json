@@ -2,11 +2,11 @@
   "name": "scratch-proj",
   "version": "1.0.0",
   "description": "A centralized app that allows users to share accounts without exposing their personal passwords.",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node server.js",
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve\" \"nodemon server.js\"",
+    "dev": "cross-env NODE_ENV=development concurrently \"webpack-dev-server --open\" \"npm run start\"",
     "server": "nodemon server.js"
   },
   "keywords": [],
