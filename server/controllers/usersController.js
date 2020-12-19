@@ -16,12 +16,37 @@ usersController.createUsers = (req, res, next) => {
       `INSERT INTO local_users (username, password) VALUES ($1, $2);`,
       values
     )
-      .then((res) => {
+      .then((data) => {
         return next();
       })
       .catch((err) => {
         return next({ err });
       });
   });
+};
+
+usersController.verifyUser = (req, res, next) => {
+  const { username, password } = req.body;
+  const param = [username];
+  db.query(`SELECT * FROM local_users WHERE (username = $1);`, param)
+    .then((data) => {
+      if (!data) {
+        res.locals.status = 'No user found';
+        return next();
+      } else {
+        bcrypt.compare(password, data.rows[0].password, (err, result) => {
+          if (result === true) {
+            res.locals.status = true;
+            return next();
+          } else {
+            res.locals.status = false;
+            return next();
+          }
+        });
+      }
+    })
+    .catch((err) => {
+      return next({ err });
+    });
 };
 module.exports = usersController;
