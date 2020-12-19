@@ -1,13 +1,24 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-
-const assets = {
+module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './client/main.js',
+  entry: ['./client/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
+    publicPath: '/',
+  },
+  devServer: {
+    publicPath: '/',
+    contentBase: path.resolve(__dirname, 'build'),
+    host: 'localhost',
+    port: 8080,
+    proxy: {
+      '/api/**': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+    },
   },
   module: {
     rules: [
@@ -17,38 +28,27 @@ const assets = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            presets: ['@babel/env', '@babel/react'],
           },
         },
       },
       {
-        test: /\.s?css/,
-        use: [
-          'style-loader', 
-          'css-loader',
-          'sass-loader',
-        ],
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: false,
-            },
-          },
-        ],
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+        },
       },
     ],
   },
-  devServer: {
-    publicPath: '/',
-    contentBase: path.resolve(__dirname, 'build'),
-    proxy: {
-      '/api': 'http://localhost:3000'
-    },
-  },
-},
-
-module.exports = assets;
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './client/index.html',
+    }),
+  ],
+  resolve: { extensions: ['.js', '.jsx'] },
+};
