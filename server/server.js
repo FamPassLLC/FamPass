@@ -7,5 +7,8 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/api/login', (req, res) => {
+  res.send('done');
+});
 app.use('/build', express.static(path.join(__dirname, '../build')));
 app.listen(3000, () => console.log('listening on port 3000...')); //listens on port 3000 -> http://localhost:3000/
