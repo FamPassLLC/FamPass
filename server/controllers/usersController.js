@@ -1,28 +1,41 @@
-const usersController = {};
 const db = require('../models/dbModels');
 const bcrypt = require('bcrypt');
 const saltRounds = 13;
 
+const usersController = {};
 //create new users
 usersController.createUsers = (req, res, next) => {
   //grab req body for username and password
   const { username, password } = req.body;
-  //encrypt password
-  bcrypt.hash(password, saltRounds, (err, hash) => {
-    const hashPassword = hash;
-    const values = [username, hashPassword];
-    //insert them to db
-    db.query(
-      `INSERT INTO local_users (username, password) VALUES ($1, $2);`,
-      values
-    )
-      .then((data) => {
+  const param = [username];
+  //look into db to see if that username exists
+  db.query(`SELECT * FROM local_users WHERE (username = $1);`, param).then(
+    (data) => {
+      //if username exists, return
+      if (data.rows.length) {
+        res.locals.status = 'user exists';
         return next();
-      })
-      .catch((err) => {
-        return next({ err });
-      });
-  });
+        //else, create that user
+      } else {
+        //encrypt password
+        bcrypt.hash(password, saltRounds, (err, hash) => {
+          const hashPassword = hash;
+          const values = [username, hashPassword];
+          //insert them to db
+          db.query(
+            `INSERT INTO local_users (username, password) VALUES ($1, $2);`,
+            values
+          )
+            .then((data) => {
+              return next();
+            })
+            .catch((err) => {
+              return next({ err });
+            });
+        });
+      }
+    }
+  );
 };
 
 usersController.verifyUser = (req, res, next) => {

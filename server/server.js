@@ -3,12 +3,17 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const usersRouter = require('../server/routes/users');
+const servicesRouter = require('../server/routes/services');
+
 //parse request body later
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//routes for users creation and verification
 app.use('/api/users', usersRouter);
 
+//routes for handling services info
+app.use('/api/services', servicesRouter);
 //not found error handler
 app.use((req, res) => {
   res.status(404).send('Not found');

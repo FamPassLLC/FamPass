@@ -6,7 +6,6 @@ router.post('/', usersController.createUsers, (req, res) => {
 });
 
 router.post('/signin', usersController.verifyUser, (req, res) => {
-  console.log('in router', res.locals.status);
   res.send('verifying user');
 });
 module.exports = router;
