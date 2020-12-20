@@ -22,11 +22,11 @@ class App extends Component {
           </div>
           </Route>
 
-          <Route path='/'>
+          {/* <Route path='/'>
           <div>
             <LoginPage />
           </div>  
-          </Route>
+          </Route> */}
 
           <Route path='/'>
           <div>
