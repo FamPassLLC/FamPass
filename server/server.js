@@ -12,6 +12,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/api/testing', (req, res) => {
+  res.send('testing');
+});
 // routes for users creation and verification (login page)
 app.use('/api/users', usersRouter);
 
