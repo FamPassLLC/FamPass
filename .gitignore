@@ -1,8 +1,6 @@
 node_modules
+
 package-lock.json
-<<<<<<< HEAD
 config.js
-=======
-.vscode
-.gitignore
->>>>>>> 7b2881fda91810dd85e004b145110cd89e673368
+
+
