@@ -9,14 +9,14 @@ class App extends Component {
 
         this.state = {
 
-        };
-    
+        };        
     }
-    
+
     render() {
+      
         return (
         <Switch> 
-          <Route path='/'>
+          <Route exact path='/'>
           <div> Julie is the best interior designer!
               <div> Derek Lam models in wedding dresses!</div>
           </div>
@@ -28,7 +28,14 @@ class App extends Component {
           </div>  
           </Route> */}
 
-          <Route path='/'>
+          
+          {/* <Route path='/'>
+          <div>
+            <CreateAccountPage />
+          </div>  
+          </Route> */}
+
+          <Route exact path='/'>
           <div>
             <FamilyPage />
           </div>  
