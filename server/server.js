@@ -9,6 +9,10 @@ const servicesRouter = require('../server/routes/services');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/api/testing', (req, res) => {
+  res.send('testing');
+});
+
 //routes for users creation and verification
 app.use('/api/users', usersRouter);
 
