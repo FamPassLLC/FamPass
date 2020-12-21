@@ -1,8 +1,10 @@
 const path = require('path');
 const bodyParser = require('body-parser');
+
 const express = require('express');
 
 // require in routers
+
 const usersRouter = require('../server/routes/users');
 const servicesRouter = require('../server/routes/services');
 
@@ -16,6 +18,9 @@ app.get('/api/testing', (req, res) => {
   res.send('testing');
 });
 // routes for users creation and verification (login page)
+
+//routes for users creation and verification
+
 app.use('/api/users', usersRouter);
 
 // routes for handling login info for services
