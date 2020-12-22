@@ -1,8 +1,42 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { render } from 'react-dom';
 
 function FamilyDisplay() {
+  //edit family name if necessary, update family name in db
+  const [familyName, updateFamilyName] = useState('');
+  //   useEffect(() => {
+  //     Axios
+  //     .get('')
+  //     .then(result => {
+  //       updateFamilyName(result.data);
+  //     })
+  //     .catch(err => console.log(err));
+  //   }, []);
+
+  //display total number of users in family
+  const [totalUsers, displayTotalUsers] = useState('');
+  //   useEffect(() => {
+  //     Axios
+  //     .get('')
+  //     .then(result => {
+  //       displayTotalUsers(result.data);
+  //     })
+  //     .catch(err => console.log(err));
+  //   }, []);
+
+  //display total number of services in family
+  const [totalServices, displayTotalServices] = useState('');
+  //   useEffect(() => {
+  //     Axios.get('')
+  //       .then((result) => {
+  //         displayTotalServices(result.data);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }, []);
+
+  //button to add (create) new user in family
+  //button to add (create) new service in family
   return (
     <div
       className='d-flex mb-5 justify-content-around'
@@ -11,6 +45,7 @@ function FamilyDisplay() {
       <div className='py-4 col-4'>
         <div className='d-flex'>
           <p className='mr-3'>
+            {/* update name to be dynamic from backend */}
             <strong>Family Name</strong>
           </p>
           <button className='btn btn-info btn-sm'>Edit</button>
@@ -64,6 +99,10 @@ function FamilyDisplay() {
           </svg>
         </div>
         <p className='text-center mt-3'>Other users</p>
+        <div className='d-flex justify-content-end'>
+          <button className='btn btn-primary mr-1'>+</button>
+          <button className='btn btn-secondary mr-1'>-</button>
+        </div>
       </div>
 
       <div className='col-4 py-4 '>
@@ -114,6 +153,10 @@ function FamilyDisplay() {
           </svg>
         </div>
         <p className='text-center mt-3'>Services</p>
+        <div className='d-flex justify-content-end'>
+          <button className='btn btn-primary mr-1'>+</button>
+          <button className='btn btn-secondary mr-1'>-</button>
+        </div>
       </div>
     </div>
   );

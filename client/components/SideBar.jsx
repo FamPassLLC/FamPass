@@ -4,6 +4,39 @@ import { render } from 'react-dom';
 import axios from 'axios';
 
 function SideBar() {
+  //generate profile icon
+  const [profileIcon, setProfileIcon] = useState('');
+  // useEffect(() => {
+  //   Axios
+  //   .get('')
+  //   .then(result => {
+  //     setProfileIcon(result.data);
+  //   })
+  //   .catch(err => console.log(err));
+  // }, []);
+
+  //after logged in, extract username from db
+  const [userName, setUserName] = useState('');
+  // useEffect(() => {
+  //   Axios
+  //   .get('')
+  //   .then(result => {
+  //     setUserName(result.data);
+  //   })
+  //   .catch(err => console.log(err));
+  // }, []);
+
+  //extract total number of user profile icons
+  const [totalUsers, setTotalUsers] = useState([]);
+  // useEffect(() => {
+  //   Axios
+  //   .get('')
+  //   .then(result => {
+  //     setTotalUsers(result.data);
+  //   })
+  //   .catch(err => console.log(err));
+  // }, []);
+
   return (
     <div
       style={{ backgroundColor: 'rgb(165, 43, 43)', height: '100vh' }}
