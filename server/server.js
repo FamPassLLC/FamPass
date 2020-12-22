@@ -7,6 +7,7 @@ const express = require('express');
 
 const usersRouter = require('../server/routes/users');
 const servicesRouter = require('../server/routes/services');
+const familiesRouter = require('../server/routes/families')
 
 const app = express();
 
@@ -25,6 +26,9 @@ app.use('/api/users', usersRouter);
 
 // routes for handling login info for services
 app.use('/api/services', servicesRouter);
+
+// routes for handling requests regarding family composition
+app.use('/api/families', familiesRouter);
 
 // middleware for page not found
 app.use((req, res) => {
