@@ -38,8 +38,8 @@ router.post('/add-family-member', familiesController.addMember, (req, res) => {
 });
 
 // request to delete users from a family
-// router.delete('/remove-family-member', familiesController.removeMember, (req, res) => {
-//   res.send('family member removed');
-// });
+router.delete('/remove-family-member', familiesController.removeMember, (req, res) => {
+  res.send('family member removed');
+});
 
 module.exports = router;
