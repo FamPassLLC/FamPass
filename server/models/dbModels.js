@@ -1,6 +1,7 @@
 const { Pool } = require('pg');
-const config = require('../../config');
-const PG_URI = config.URI;
+const config = require('../config.js');
+
+const PG_URI = config.PG_URI;
 const pool = new Pool({ connectionString: PG_URI });
 
 module.exports = {

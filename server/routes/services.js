@@ -20,9 +20,15 @@ router.put(
   (req, res) => {
     console.log(res.locals.status);
     res.send('updated service password');
-  }
-);
+  });
 
-// TO ADD: (1) REQUEST TO GET LOGIN INFO; (2) REQUEST TO DELETE LOGIN INFO
+router.delete('/delete-service-password',
+  servicesController.deleteServicesLogin,
+  (req, res) => {
+    console.log(res.locals.status);
+    res.send('service password deleted');
+  });
+
+// TO ADD: (1) REQUEST TO GET LOGIN INFO
 
 module.exports = router;

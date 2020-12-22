@@ -67,4 +67,19 @@ servicesController.updateServicesLogin = (req, res, next) => {
     .catch((err) => next({ err }));
 };
 
+// allows users to delete previously saved login information
+servicesController.deleteServicesLogin = (req, res, next) => {
+  // will take local user and service
+  const { local_user, service } = req.body;
+  const queryString = `DELETE FROM service_login WHERE (local_user = $1 AND service = $2);`;
+  const params = [local_user, service];
+  // delete row containing local user and specified service from service_login table
+  db.query(queryString, params)
+    .then((data) => {
+      res.locals.status = 'login info deleted';
+      return next();
+    })
+    .catch((err) => next({ err }));
+};
+
 module.exports = servicesController;
