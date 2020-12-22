@@ -1,0 +1,13 @@
+{
+    "manifest_version": 0,
+    "name": "scratch_proj",
+    "version": "0.1.0",
+    "description": "A centralized website that allows users to share accounts without exposing their real passwords.",
+    "content_scripts": [
+       {
+          "matches": ["<all_urls>"], 
+          "js": ["script.js"], 
+          "css": ["extension.css"]
+       }
+     ]
+   }
