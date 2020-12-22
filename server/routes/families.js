@@ -7,6 +7,10 @@ const familiesController = require('../controllers/familiesController');
 
 const router = express.Router();
 
+// +++++++++++++++++++++++++++++++++++++++++++++
+// +++ Methods to create and delete families +++
+// +++++++++++++++++++++++++++++++++++++++++++++
+
 // request to retrieve families (for display on landing page)
 // router.get('/', familiesController.getFamilies, (req, res) => {
 //   res.send('getting families');
@@ -22,6 +26,20 @@ router.delete('/deletefamily', familiesController.deleteFamily, (req, res) => {
   res.send('family deleted');
 });
 
-// TO ADD: REQUESTS TO DELETE A FAMILY
+// +++++++++++++++++++++++++++++++++++++++++++++++++
+// +++ Methods to add/remove users from families +++
+// +++++++++++++++++++++++++++++++++++++++++++++++++
+
+// request to get users in a family
+
+// request to add to a family
+router.post('/add-family-member', familiesController.addMember, (req, res) => {
+  res.send('family member added');
+});
+
+// request to delete users from a family
+// router.delete('/remove-family-member', familiesController.removeMember, (req, res) => {
+//   res.send('family member removed');
+// });
 
 module.exports = router;
