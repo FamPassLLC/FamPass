@@ -16,12 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/api/testing', (req, res) => {
   res.send('testing');
 });
-<<<<<<< HEAD
-=======
 // routes for users creation and verification (login page)
->>>>>>> d4a8505813a29c8326f969e2832b4333a88a2fd5
-
-//routes for users creation and verification
 
 app.use('/api/users', usersRouter);
 
