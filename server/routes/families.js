@@ -12,9 +12,9 @@ const router = express.Router();
 // +++++++++++++++++++++++++++++++++++++++++++++
 
 // request to retrieve families (for display on landing page)
-// router.get('/', familiesController.getFamilies, (req, res) => {
-//   res.send('getting families');
-// });
+router.get('/', familiesController.getFamilies, (req, res) => {
+  res.status(200).send(res.locals.familyDetails); // arr of objs { _id: NUM, family_name: STRING }
+});
 
 // request to create a family
 router.post('/addfamily', familiesController.addFamily, (req, res) => {

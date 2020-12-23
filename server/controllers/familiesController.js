@@ -6,6 +6,22 @@ const familiesController = {};
 // +++ Methods to create and delete families +++
 // +++++++++++++++++++++++++++++++++++++++++++++
 
+// get request to retrieve families and members - returns arr of objs { family_name, username }
+familiesController.getFamilies = (req, res, next) => {
+  // gets table with all users/families because GET requests generally lack bodies
+  const queryString = `SELECT f.family_name, lu.username 
+    FROM family_members fm
+    JOIN families f ON f._id = fm.family_id
+    JOIN local_users lu ON lu._id = fm.local_user_id`;
+  db.query(queryString)
+    .then((data) => {
+      res.locals.familyDetails = data.rows; // data.rows is arr of objs with format { family_name, username }
+      console.log(data.rows);
+      return next();
+    })
+    .catch((err) => next({ err }));
+};
+
 // post request to create a family
 familiesController.addFamily = (req, res, next) => {
   // request body should include family name
@@ -30,16 +46,25 @@ familiesController.addFamily = (req, res, next) => {
     .catch((err) => next({ err }));
 };
 
-// request to modify family name
+// request to modify family name (update request)
 familiesController.renameFamily = (req, res, next) => {
-  // get new family name from request body
+  // get new family name and existing family name from request body
   const { newName, family_name } = req.body;
-  const values = [newName, family_name]
-  const queryString = `UPDATE families SET family_name = $1 WHERE (family_name = $2)`;
-  db.query(queryString, values)
+  // check whether updated family name already exists
+  db.query('SELECT * FROM families WHERE (family_name = $1', [newName])
     .then((data) => {
-      res.locals.status = 'family name updated';
-      return next();
+      if (data.rows.length) {
+        res.locals.status = 'new family name already exists';
+        return next();
+      } else {
+        const values = [newName, family_name]
+        const queryString = `UPDATE families SET family_name = $1 WHERE (family_name = $2)`;
+        db.query(queryString, values)
+          .then((data) => {
+            res.locals.status = 'family name updated';
+            return next();
+          })
+      }
     })
     .catch((err) => next({ err }));
 };
@@ -62,6 +87,9 @@ familiesController.deleteFamily = (req, res, next) => {
 // +++++++++++++++++++++++++++++++++++++++++++++++++
 // +++ Methods to add/remove users from families +++
 // +++++++++++++++++++++++++++++++++++++++++++++++++
+
+// retrieves all family members in table
+
 
 // adds a user to a family - pass local_user and family_name
 familiesController.addMember = (req, res, next) => {
