@@ -17,21 +17,21 @@ function WelcomeDisplay() {
 
 
   return (
-    <div id="container" className='d-flex justify-content-center' style ={{margin: '10vw'}}>
+    <div id="welcomeButtons" className='d-flex justify-content-center' style ={{margin: '10vw'}}>
       
-      <div className='mx-5' id="viewMyFamilies">
-        <h5 className='d-flex justify-content-center' style={{color: 'grey'}}>View my families</h5>
+      <div className='flex-column align-item-center mx-5' id="viewMyFamilies">
+        <h5 className='text-center mb-4' style={{color: 'grey'}}>View my families</h5>
         <button
-        className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-6 justify-content-around'
+        className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-auto justify-content-around'
         style={{ width: '15vw', height: '15vw', borderRadius: '15px' }}
         > Image 1
         </button>
       </div>
 
       <div className='mx-5' id="viewSharedServices">
-      <h5 className='d-flex justify-content-center' style={{color: 'grey'}}>View shared with me</h5>
+        <h5 className='text-center mb-4' style={{color: 'grey'}}>View shared with me</h5>
         <button
-        className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-6 justify-content-around'
+        className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-auto justify-content-around'
         style={{ width: '15vw', height: '15vw', borderRadius: '15px' }}
         >Image 2
         </button>
