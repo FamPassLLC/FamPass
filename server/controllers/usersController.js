@@ -50,9 +50,11 @@ usersController.verifyUser = (req, res, next) => {
       } else { // if there is such a user, compare password with encrypted password
         bcrypt.compare(password, data.rows[0].password, (err, result) => {
           if (result === true) { // if provided password matches saved password
+            console.log("User verified")
             res.locals.status = true;
             return next();
           } else { // if provided password is not a match
+            console.log("Passwords do not match")
             res.locals.status = false;
             return next();
           }
