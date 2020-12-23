@@ -21,6 +21,11 @@ router.post('/addfamily', familiesController.addFamily, (req, res) => {
   res.send('adding families');
 });
 
+// request to rename a family
+router.put('/renamefamily', familiesController.renameFamily, (req, res) => {
+  res.send('family updated');
+});
+
 // request to delete a family
 router.delete('/deletefamily', familiesController.deleteFamily, (req, res) => {
   res.send('family deleted');
@@ -31,6 +36,9 @@ router.delete('/deletefamily', familiesController.deleteFamily, (req, res) => {
 // +++++++++++++++++++++++++++++++++++++++++++++++++
 
 // request to get users in a family
+// router.get('/get-family-members', familiesController.getMembers, (req, res) => {
+//   res.send('family members retrieved');
+// });
 
 // request to add to a family
 router.post('/add-family-member', familiesController.addMember, (req, res) => {

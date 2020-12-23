@@ -10,12 +10,35 @@ const familiesController = {};
 familiesController.addFamily = (req, res, next) => {
   // request body should include family name
   const { family_name } = req.body;
-  const queryString = `INSERT INTO families (family_name) VALUES ($1)`;
-  const values = [family_name];
-  // query
+  // first, check whether a family with name already exists
+  db.query('SELECT * FROM families WHERE (family_name = $1)', [family_name])
+    .then((data) => {
+      if (data.rows.length) {
+        res.locals.status = 'family already exists';
+        return next();
+      } else {
+        const queryString = `INSERT INTO families (family_name) VALUES ($1)`;
+        const values = [family_name];
+        // query
+        db.query(queryString, values)
+          .then((data) => {
+            res.locals.status = 'family created';
+            return next();
+          });
+      }
+    })
+    .catch((err) => next({ err }));
+};
+
+// request to modify family name
+familiesController.renameFamily = (req, res, next) => {
+  // get new family name from request body
+  const { newName, family_name } = req.body;
+  const values = [newName, family_name]
+  const queryString = `UPDATE families SET family_name = $1 WHERE (family_name = $2)`;
   db.query(queryString, values)
     .then((data) => {
-      res.locals.status = 'family created';
+      res.locals.status = 'family name updated';
       return next();
     })
     .catch((err) => next({ err }));
