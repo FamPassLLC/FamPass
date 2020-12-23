@@ -7,6 +7,7 @@ const familiesController = {};
 // +++++++++++++++++++++++++++++++++++++++++++++
 
 // get request to retrieve families and members - returns arr of objs { family_name, username }
+// use this method to get members in families, too
 familiesController.getFamilies = (req, res, next) => {
   // gets table with all users/families because GET requests generally lack bodies
   const queryString = `SELECT f.family_name, lu.username 
@@ -88,9 +89,6 @@ familiesController.deleteFamily = (req, res, next) => {
 // +++ Methods to add/remove users from families +++
 // +++++++++++++++++++++++++++++++++++++++++++++++++
 
-// retrieves all family members in table
-
-
 // adds a user to a family - pass local_user and family_name
 familiesController.addMember = (req, res, next) => {
   // get data from body and put into variables - body will include family name and local username of user to add
@@ -106,20 +104,20 @@ familiesController.addMember = (req, res, next) => {
       const firstQuery2 = `SELECT _id FROM local_users WHERE (username = $1)`;
       const firstQuery2Value = [local_user];
       db.query(firstQuery2, firstQuery2Value)
-        .then((data) => {
-          const local_user_id = data.rows[0]._id;
+        .then((data2) => {
+          const local_user_id = data2.rows[0]._id;
           // next query: check whether family already contains the specified member
           const newMemberInfo = [family_id, local_user_id];
           db.query(`SELECT * FROM family_members WHERE (family_id = $1 AND local_user_id = $2)`, newMemberInfo)
-            .then((data) => {
-              if (data.rows.length) { // if user is already a family member, this will evalute to true
+            .then((data3) => {
+              if (data3.rows.length) { // if user is already a family member, this will evalute to true
                 res.locals.status = 'member already in family';
                 return next();
               } else {
                 // final query: add member to family
                 const lastQuery = `INSERT INTO family_members (family_id, local_user_id) VALUES ($1, $2)`;
                 db.query(lastQuery, newMemberInfo)
-                  .then((data) => {
+                  .then(() => {
                     res.locals.status = 'new member added';
                     return next();
                   });
@@ -145,14 +143,72 @@ familiesController.removeMember = (req, res, next) => {
       const firstQuery2 = `SELECT _id FROM local_users WHERE (username = $1)`;
       const firstQuery2Value = [local_user];
       db.query(firstQuery2, firstQuery2Value)
-        .then((data) => {
-          const local_user_id = data.rows[0]._id;
+        .then((data2) => {
+          const local_user_id = data2.rows[0]._id;
           // final query: remove specified user from family
           const finalQuery = 'DELETE FROM family_members WHERE (family_id = $1 AND local_user_id = $2)';
           const memberInfo = [family_id, local_user_id];
           db.query(finalQuery, memberInfo)
-            .then((data) => {
+            .then(() => {
               res.locals.status = 'family member removed';
+              return next();
+            });
+        });
+    })
+    .catch((err) => next({ err }));
+};
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++ Methods to associate services with families +++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// shares service with a family
+// body should include family name, service, local_user
+familiesController.shareService = (req, res, next) => {
+  const { family_name, service, local_user } = req.body;
+  // first, queries to obtain family_id and service_login_id
+  const firstQuery1 = 'SELECT _id FROM families WHERE (family_name = $1)'; // will get family id
+  const firstQuery1Value = [family_name];
+  db.query(firstQuery1, firstQuery1Value)
+    .then((data) => {
+      const family_id = data.rows[0]._id;
+      const firstQuery2 = 'SELECT _id FROM service_login WHERE (service = $1 AND local_user = $2)';
+      const firstQuery2Values = [service, local_user];
+      db.query(firstQuery2, firstQuery2Values)
+        .then((data2) => {
+          const service_login_id = data2.rows[0]._id;
+          // final query: add to family_logins table
+          const serviceInfo = [family_id, service_login_id];
+          db.query('INSERT INTO family_logins (family_id, service_login_id) VALUES ($1, $2)', serviceInfo)
+            .then(() => {
+              res.locals.status = 'service shared';
+              return next();
+            });
+        });
+    })
+    .catch((err) => next({ err }));
+};
+
+// stop sharing a service with a family
+// body should include family name, service, local_user
+familiesController.stopSharingService = (req, res, next) => {
+  const { family_name, service, local_user } = req.body;
+  // first, queries to obtain family_id and service_login_id
+  const firstQuery1 = 'SELECT _id FROM families WHERE (family_name = $1)'; // will get family id
+  const firstQuery1Value = [family_name];
+  db.query(firstQuery1, firstQuery1Value)
+    .then((data) => {
+      const family_id = data.rows[0]._id;
+      const firstQuery2 = 'SELECT _id FROM service_login WHERE (service = $1 AND local_user = $2)';
+      const firstQuery2Values = [service, local_user];
+      db.query(firstQuery2, firstQuery2Values)
+        .then((data2) => {
+          const service_login_id = data2.rows[0]._id;
+          // final query: delete from family_logins table
+          const serviceInfo = [family_id, service_login_id];
+          db.query('DELETE FROM family_logins WHERE (family_id = $1 AND service_login_id = $2)', serviceInfo)
+            .then(() => {
+              res.locals.status = 'sharing stopped';
               return next();
             });
         });

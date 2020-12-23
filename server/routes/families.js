@@ -12,8 +12,9 @@ const router = express.Router();
 // +++++++++++++++++++++++++++++++++++++++++++++
 
 // request to retrieve families (for display on landing page)
+// also use this method to get members to display within families
 router.get('/', familiesController.getFamilies, (req, res) => {
-  res.status(200).send(res.locals.familyDetails); // arr of objs { _id: NUM, family_name: STRING }
+  res.status(200).send(res.locals.familyDetails); // arr of objs { family_name, username }
 });
 
 // request to create a family
@@ -35,11 +36,6 @@ router.delete('/deletefamily', familiesController.deleteFamily, (req, res) => {
 // +++ Methods to add/remove users from families +++
 // +++++++++++++++++++++++++++++++++++++++++++++++++
 
-// request to get users in a family
-// router.get('/get-family-members', familiesController.getMembers, (req, res) => {
-//   res.send('family members retrieved');
-// });
-
 // request to add to a family
 router.post('/add-family-member', familiesController.addMember, (req, res) => {
   res.send('family member added');
@@ -48,6 +44,20 @@ router.post('/add-family-member', familiesController.addMember, (req, res) => {
 // request to delete users from a family
 router.delete('/remove-family-member', familiesController.removeMember, (req, res) => {
   res.send('family member removed');
+});
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++ Methods to associate services with families +++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// share service with family
+router.post('/share-service', familiesController.shareService, (req, res) => {
+  res.send('service shared');
+});
+
+// stop sharing service with family
+router.delete('/stop-sharing-service', familiesController.stopSharingService, (req, res) => {
+  res.send('sharing stopped');
 });
 
 module.exports = router;
