@@ -7,6 +7,11 @@ const servicesController = require('../controllers/servicesController');
 
 const router = express.Router();
 
+// request to retrieve services login info for all families
+router.get('/get-login-info', servicesController.getServicesLogin, (req, res) => {
+  res.status(200).send(res.locals.loginInfo);
+});
+
 // request to add login information to a service
 router.post('/', servicesController.addServicesLogin, (req, res) => {
   console.log(res.locals.status);

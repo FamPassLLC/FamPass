@@ -8,6 +8,7 @@ const familiesController = {};
 
 // get request to retrieve families and members - returns arr of objs { family_name, username }
 // use this method to get members in families, too
+// on frontend, filter by family_name or username depending on use
 familiesController.getFamilies = (req, res, next) => {
   // gets table with all users/families because GET requests generally lack bodies
   const queryString = `SELECT f.family_name, lu.username 

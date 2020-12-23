@@ -39,9 +39,21 @@ servicesController.addServicesLogin = (req, res, next) => {
     .catch((err) => next({ err }));
 };
 
-//need to verify with frontend what type of data needs returning
+// will return table with family names and available services
+// gets arr of objs w/ format: family_name, local_user, service, service_username, service_password
+// on frontend, filter by family_name
 servicesController.getServicesLogin = (req, res, next) => {
-  const queryString = `SELECT * FROM service_login;`;
+  const queryString = `SELECT f.family_name, sl.local_user, sl.service, sl.service_username, sl.service_password
+  FROM family_logins fl
+  JOIN families f ON f._id = fl.family_id
+  JOIN service_login sl ON sl._id = fl.service_login_id`;
+
+  db.query(queryString)
+    .then((data) => {
+      res.locals.loginInfo = data.rows; // note that service_password is encoded
+      return next();
+    })
+    .catch((err) => next({ err }));
 };
 
 // allows user to update saved password for third-party service
