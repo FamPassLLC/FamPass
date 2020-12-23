@@ -7,7 +7,7 @@ function SideBar() {
   //generate profile icon
   const [profileIcon, setProfileIcon] = useState('');
   // useEffect(() => {
-  //   Axios
+  //   axios
   //   .get('')
   //   .then(result => {
   //     setProfileIcon(result.data);
@@ -18,7 +18,7 @@ function SideBar() {
   //after logged in, extract username from db
   const [userName, setUserName] = useState('');
   // useEffect(() => {
-  //   Axios
+  //   axios
   //   .get('')
   //   .then(result => {
   //     setUserName(result.data);
@@ -29,7 +29,7 @@ function SideBar() {
   //extract total number of user profile icons
   const [totalUsers, setTotalUsers] = useState([]);
   // useEffect(() => {
-  //   Axios
+  //   axios
   //   .get('')
   //   .then(result => {
   //     setTotalUsers(result.data);
@@ -190,9 +190,7 @@ function SideBar() {
           </svg>
         </div>
       </div>
-      <div style={{ marginTop: '30vh' }}>
-        <button className='btn btn-warning'>View shared services</button>
-      </div>
+      
     </div>
   );
 }

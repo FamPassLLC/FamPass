@@ -9,13 +9,16 @@ function FamilyPage() {
     <div className='d-flex'>
       <div className='col-3 px-0'>
         <SideBar />
+        <div className='d-flex flex-column align-items-center'>
+          <button className='btn btn-warning'>View shared services</button>
+        </div>
       </div>
       <div className='col-8 mt-5 pt-5 ml-5'>
         <FamilyDisplay />
         <FamilyDisplay />
         <div className='d-flex justify-content-end'>
-          <button className='btn btn-success mr-2'>Add family +</button>
-          <button className='btn btn-danger '>Remove family -</button>
+          <button className='btn btn-success mr-2'>+ Add Family</button>
+          <button className='btn btn-danger '>- Remove Family</button>
         </div>
       </div>
     </div>
