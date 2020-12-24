@@ -39,21 +39,9 @@ servicesController.addServicesLogin = (req, res, next) => {
     .catch((err) => next({ err }));
 };
 
-// will return table with family names and available services
-// gets arr of objs w/ format: family_name, local_user, service, service_username, service_password
-// on frontend, filter by family_name
+//need to verify with frontend what type of data needs returning
 servicesController.getServicesLogin = (req, res, next) => {
-  const queryString = `SELECT f.family_name, sl.local_user, sl.service, sl.service_username, sl.service_password
-  FROM family_logins fl
-  JOIN families f ON f._id = fl.family_id
-  JOIN service_login sl ON sl._id = fl.service_login_id`;
-
-  db.query(queryString)
-    .then((data) => {
-      res.locals.loginInfo = data.rows; // note that service_password is encoded
-      return next();
-    })
-    .catch((err) => next({ err }));
+  const queryString = `SELECT * FROM service_login;`;
 };
 
 // allows user to update saved password for third-party service
@@ -74,21 +62,6 @@ servicesController.updateServicesLogin = (req, res, next) => {
   db.query(queryString, params)
     .then((data) => {
       res.locals.status = 'new password updated';
-      return next();
-    })
-    .catch((err) => next({ err }));
-};
-
-// allows users to delete previously saved login information
-servicesController.deleteServicesLogin = (req, res, next) => {
-  // will take local user and service
-  const { local_user, service } = req.body;
-  const queryString = `DELETE FROM service_login WHERE (local_user = $1 AND service = $2);`;
-  const params = [local_user, service];
-  // delete row containing local user and specified service from service_login table
-  db.query(queryString, params)
-    .then((data) => {
-      res.locals.status = 'login info deleted';
       return next();
     })
     .catch((err) => next({ err }));

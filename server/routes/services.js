@@ -7,11 +7,6 @@ const servicesController = require('../controllers/servicesController');
 
 const router = express.Router();
 
-// request to retrieve services login info for all families
-router.get('/get-login-info', servicesController.getServicesLogin, (req, res) => {
-  res.status(200).send(res.locals.loginInfo);
-});
-
 // request to add login information to a service
 router.post('/', servicesController.addServicesLogin, (req, res) => {
   console.log(res.locals.status);
@@ -25,15 +20,9 @@ router.put(
   (req, res) => {
     console.log(res.locals.status);
     res.send('updated service password');
-  });
+  }
+);
 
-router.delete('/delete-service-password',
-  servicesController.deleteServicesLogin,
-  (req, res) => {
-    console.log(res.locals.status);
-    res.send('service password deleted');
-  });
-
-// TO ADD: (1) REQUEST TO GET LOGIN INFO
+// TO ADD: (1) REQUEST TO GET LOGIN INFO; (2) REQUEST TO DELETE LOGIN INFO
 
 module.exports = router;

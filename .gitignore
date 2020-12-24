@@ -1,10 +1,6 @@
 node_modules
-<<<<<<< HEAD
-package-lock.json
-=======
 
 package-lock.json
 config.js
 
 
->>>>>>> a128d8510fa2a6e905ee64ca41bc47db73b17173
