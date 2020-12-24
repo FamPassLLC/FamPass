@@ -1,0 +1,13 @@
+#login {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 60vh;
+    margin: 10px
+}
+
+/* #userName {
+    display: flex;
+    justify-content: flex-start;
+} */
