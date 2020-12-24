@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { render } from 'react-dom';
-
+import FamilyName from './FamilyName';
 function FamilyDisplay() {
   //edit family name if necessary, update family name in db
   const [familyName, updateFamilyName] = useState('');
@@ -43,13 +43,7 @@ function FamilyDisplay() {
       style={{ backgroundColor: 'rgb(196, 196, 196)', borderRadius: '15px' }}
     >
       <div className='py-4 col-4'>
-        <div className='d-flex'>
-          <p className='mr-3'>
-            {/* update name to be dynamic from backend */}
-            <strong>Family Name</strong>
-          </p>
-          <button className='btn btn-info btn-sm'>Edit</button>
-        </div>
+        <FamilyName />
         <p className='mb-0 mt-2'># of users</p>
         <p># of services</p>
       </div>
