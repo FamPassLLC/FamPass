@@ -11,7 +11,8 @@ usersController.createUsers = (req, res, next) => {
   // look into db to see if that username exists - if so, will redirect
   db.query(`SELECT * FROM local_users WHERE (username = $1);`, param).then(
     (data) => {
-      if (data.rows.length) { // if user exists
+      if (data.rows.length) {
+        // if user exists
         res.locals.status = 'user exists';
         return next();
         //else, create that user
@@ -44,15 +45,19 @@ usersController.verifyUser = (req, res, next) => {
   // query DB to get user with provided username
   db.query(`SELECT * FROM local_users WHERE (username = $1);`, param)
     .then((data) => {
-      if (!data) { // if no such user, stop here
+      if (!data) {
+        // if no such user, stop here
         res.locals.status = 'No user found';
         return next();
-      } else { // if there is such a user, compare password with encrypted password
+      } else {
+        // if there is such a user, compare password with encrypted password
         bcrypt.compare(password, data.rows[0].password, (err, result) => {
-          if (result === true) { // if provided password matches saved password
+          if (result === true) {
+            // if provided password matches saved password
             res.locals.status = true;
             return next();
-          } else { // if provided password is not a match
+          } else {
+            // if provided password is not a match
             res.locals.status = false;
             return next();
           }
