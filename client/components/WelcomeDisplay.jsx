@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
-import { Switch, Route, Link, Redirect } from 'react-router-dom';
+import { Switch, Route, Link, Redirect, useHistory } from 'react-router-dom';
 import { render } from 'react-dom';
 import axios from 'axios';
 
@@ -17,8 +17,13 @@ function WelcomeDisplay() {
 
   const history = useHistory();
   const redirectToFamily = (e) => {
-  e.preventdefault()
+    e.preventDefault();
     history.push('/family')
+  }
+
+  const redirectToServices = (e) => {
+    e.preventDefault();
+    history.push('/services')
   }
 
   return (
@@ -37,7 +42,7 @@ function WelcomeDisplay() {
       <div className='mx-5' id="viewSharedServices">
         <h5 className='text-center mb-4' style={{color: 'grey'}}>View shared with me</h5>
         <button
-        
+        onClick={redirectToServices}
         className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-auto justify-content-around'
         style={{ width: '15vw', height: '15vw', borderRadius: '15px' }}
         >Image 2

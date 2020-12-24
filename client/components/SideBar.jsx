@@ -1,9 +1,19 @@
 import React, { Component, useEffect, useState } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, useHistory } from 'react-router-dom';
 import { render } from 'react-dom';
 import axios from 'axios';
 
-function SideBar() {
+function SideBar(props) {
+  
+  //button to switch to other location 
+  const history = useHistory();
+  const switchTo = (e) => {
+    e.preventDefault();
+    if(props.switchTo === 'View shared services')
+    history.push('/services')
+    else history.push('/family')
+  }
+  
   //generate profile icon
   const [profileIcon, setProfileIcon] = useState('');
   // useEffect(() => {
@@ -190,7 +200,10 @@ function SideBar() {
           </svg>
         </div>
       </div>
-      
+        <div className='d-flex flex-column align-items-center'>
+          <button onClick={switchTo} className='btn btn-warning'>{props.switchTo}</button>
+        </div>
+
     </div>
   );
 }

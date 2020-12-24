@@ -9,10 +9,8 @@ function ServicesPage() {
   return (
     <div className='d-flex'>
       <div className='col-3 px-0'>
-        <SideBar />
-        <div className='d-flex flex-column align-items-center'>
-          <button className='btn btn-warning'>View my families</button>
-        </div>
+        <SideBar switchTo='View my families'/>
+        
       </div>
       <div className='col-8 mt-5 pt-5 ml-5'>
         

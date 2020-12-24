@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import { render } from 'react-dom';
+import LoginPage from './components/LoginPage'
 import FamilyPage from './components/FamilyPage';
-import ServicesPage from './components/ServicesPage';
-import WelcomePage from './components/WelcomePage';
+import WelcomePage from './components/WelcomePage'
 import styles from './componentStyles/style.css';
+import ServicesPage from './components/ServicesPage';
+
+
+
 
 class App extends Component {
   constructor() {
@@ -15,12 +19,23 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <WelcomePage />
-        {/* <FamilyPage /> */}
-        {/*<ServicesPage />*/}
-        
-      </div>
+      <Router>
+        <div>
+        {/* <Route exact path="/">
+          <LoginPage></LoginPage>
+        </Route> */}
+        <Route exact path="/">
+          <WelcomePage></WelcomePage>
+        </Route>
+        <Route exact path="/family">
+          <FamilyPage></FamilyPage>
+        </Route>
+        <Route exact path="/services">
+          <ServicesPage/>
+        </Route>
+        </div>
+      </Router>
+      
     );
   }
 }
