@@ -15,7 +15,7 @@ function FamilyPage() {
         <FamilyDisplay />
         <div className='d-flex justify-content-end'>
           <button className='btn btn-success mr-2'>Add family +</button>
-          <button className='btn btn-danger '>Remove family -</button>
+          <button className='btn btn-danger'>Remove family -</button>
         </div>
       </div>
     </div>

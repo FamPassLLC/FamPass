@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link , useHistory} from 'react-router-dom';
 import { render } from "react-dom";
 import { data } from "jquery";
 
+
 function LoginPage(props) {
+  const history = useHistory();
   const [state, setState] = useState({
     username: "",
     password: "",
@@ -15,7 +17,8 @@ function LoginPage(props) {
       [id]: value
     }))
   }
-  const sendDetailsToServer = () => {
+  const sendDetailsToServer = (e) => {
+    e.preventDefault();
     if (state.username.length && state.password.length) {
       const payload ={
         "username": state.username,
@@ -42,8 +45,7 @@ function LoginPage(props) {
     }
   }
   const redirectToHome = () => {
-    props.updateTitle('Home')
-    props.history.push('/home');
+    history.push('/home')
   }
     return (
       <div>

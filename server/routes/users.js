@@ -14,7 +14,8 @@ router.post('/', usersController.createUsers, (req, res) => {
 
 // request to sign into an existing account
 router.post('/signin', usersController.verifyUser, (req, res) => {
-  res.send('verifying user');
+  res.status(200)
+  return res.send('Hello there')
 });
 
 module.exports = router;
