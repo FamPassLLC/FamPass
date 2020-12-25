@@ -8,8 +8,13 @@ const usersController = require('../controllers/usersController');
 const router = express.Router();
 
 // request to create an account
-router.post('/', usersController.createUsers, (req, res) => {
-  res.send('created user ');
+router.post('/signup', usersController.createUsers, (req, res) => {
+  if (res.locals.status === 'user exists') {
+    res.status(409)
+    return res.send('User exists')
+  }
+  res.status(200)
+  return res.send('Created user')
 });
 
 // request to sign into an existing account

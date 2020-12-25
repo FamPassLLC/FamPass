@@ -8,7 +8,8 @@ function FamilyPage() {
   return (
     <div className='d-flex'>
       <div className='col-3 px-0'>
-        <SideBar />
+        <SideBar switchTo='View shared services' />
+
       </div>
       <div className='col-8 mt-5 pt-5 ml-5'>
         <FamilyDisplay />

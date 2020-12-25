@@ -1,13 +1,23 @@
 import React, { Component, useEffect, useState } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, useHistory } from 'react-router-dom';
 import { render } from 'react-dom';
 import axios from 'axios';
 
-function SideBar() {
+function SideBar(props) {
+  
+  //button to switch to other location 
+  const history = useHistory();
+  const switchTo = (e) => {
+    e.preventDefault();
+    if(props.switchTo === 'View shared services')
+    history.push('/services')
+    else history.push('/family')
+  }
+  
   //generate profile icon
   const [profileIcon, setProfileIcon] = useState('');
   // useEffect(() => {
-  //   Axios
+  //   axios
   //   .get('')
   //   .then(result => {
   //     setProfileIcon(result.data);
@@ -18,7 +28,7 @@ function SideBar() {
   //after logged in, extract username from db
   const [userName, setUserName] = useState('');
   // useEffect(() => {
-  //   Axios
+  //   axios
   //   .get('')
   //   .then(result => {
   //     setUserName(result.data);
@@ -29,7 +39,7 @@ function SideBar() {
   //extract total number of user profile icons
   const [totalUsers, setTotalUsers] = useState([]);
   // useEffect(() => {
-  //   Axios
+  //   axios
   //   .get('')
   //   .then(result => {
   //     setTotalUsers(result.data);
@@ -190,9 +200,10 @@ function SideBar() {
           </svg>
         </div>
       </div>
-      <div style={{ marginTop: '30vh' }}>
-        <button className='btn btn-warning'>View shared services</button>
-      </div>
+        <div className='d-flex flex-column align-items-center'>
+          <button onClick={switchTo} className='btn btn-warning'>{props.switchTo}</button>
+        </div>
+
     </div>
   );
 }

@@ -7,7 +7,7 @@ const usersController = {};
 // create new user in login database - new account for website
 usersController.createUsers = (req, res, next) => {
   const { username, password } = req.body;
-  const param = [username];
+  const param = [username.toLowerCase()];
   // look into db to see if that username exists - if so, will redirect
   db.query(`SELECT * FROM local_users WHERE (username = $1);`, param).then(
     (data) => {
@@ -19,7 +19,7 @@ usersController.createUsers = (req, res, next) => {
         // encrypt provided password using bcrypt
         bcrypt.hash(password, saltRounds, (err, hash) => {
           const hashPassword = hash;
-          const values = [username, hashPassword];
+          const values = [username.toLowerCase(), hashPassword];
           // add username and password to DB
           db.query(
             `INSERT INTO local_users (username, password) VALUES ($1, $2);`,
@@ -40,7 +40,7 @@ usersController.createUsers = (req, res, next) => {
 // checks whether login credentials are valid
 usersController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
-  const param = [username];
+  const param = [username.toLowerCase()];
   // query DB to get user with provided username
   db.query(`SELECT * FROM local_users WHERE (username = $1);`, param)
     .then((data) => {
