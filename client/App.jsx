@@ -6,6 +6,7 @@ import FamilyPage from './components/FamilyPage';
 import WelcomePage from './components/WelcomePage'
 import styles from './componentStyles/style.css';
 import ServicesPage from './components/ServicesPage';
+import SignUpPage from './components/Signup';
 
 
 

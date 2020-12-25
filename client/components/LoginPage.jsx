@@ -47,8 +47,12 @@ function LoginPage(props) {
   const redirectToHome = () => {
     history.push('/home')
   }
+  // sign up button needs to be added to page and given this function
+  const redirectToSignUp = () => {
+    history.push('/signup')
+  }
     return (
-      <div>
+      <div id="loginPage" class>
         <h1>Login page</h1>
         <div>
           <form>
