@@ -40,19 +40,20 @@ function FamilyDisplay() {
     <div id="familyName"
       className='d-flex mb-5 justify-content-around'
       style={{ backgroundColor: 'rgb(196, 196, 196)', borderRadius: '15px' }}>
-      <div className='py-4 col-4'>
-        <div className='d-flex'>
-          <p className='mr-3'>
+      <div className='py-2 col-4'>
+        <div className='d-flex align-items-center'>
+          <p className='mt-3 mr-3'>
             {/* update name to be dynamic from backend */}
             <strong>Family Name</strong>
           </p>
-          <button className='btn btn-outline-secondary'>Edit</button>
+          <button className='btn btn-outline-primary'>Edit</button>
         </div>
         <p className='mb-0 mt-2'># of users</p>
         <p># of services</p>
+        <button className='btn btn-secondary btn-sm'>- Remove family</button>
       </div>
 
-      <div id="members" className=' py-4  col-4'>
+      <div id="members" className=' py-4 col-4'>
         <div className='justify-content-around d-flex'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -98,8 +99,10 @@ function FamilyDisplay() {
         </div>
         <p className='text-center mt-3'>Members</p>
         <div className='d-flex justify-content-end'>
-          <button className='btn btn-primary mr-1'>+</button>
-          <button className='btn btn-secondary mr-1'>-</button>
+          <div className='btn-group' role='group' aria-label='Side-by-side button group'>
+            <button className='btn btn-primary btn-sm mt-3'>+</button>
+           <button className='btn btn-secondary btn-sm mt-3'>-</button>
+          </div>
         </div>
       </div>
 
@@ -152,9 +155,12 @@ function FamilyDisplay() {
         </div>
         <p className='text-center mt-3'>Shared Services</p>
         <div className='d-flex justify-content-end'>
-          <button className='btn btn-primary mr-1'>+</button>
-          <button className='btn btn-secondary mr-1'>-</button>
+          <div className='btn-group' role='group' aria-label='Side-by-side button group'>
+            <button className='btn btn-primary btn-sm mt-3'>+</button>
+           <button className='btn btn-secondary btn-sm mt-3'>-</button>
+          </div>
         </div>
+        
       </div>
     </div>
   );

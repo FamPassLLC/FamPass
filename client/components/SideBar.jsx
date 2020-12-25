@@ -49,7 +49,7 @@ function SideBar(props) {
 
   return (
     <div
-      style={{ backgroundColor: 'rgb(165, 43, 43)', height: '100vh' }}
+      style={{ backgroundColor: 'rgb(13, 59, 102)', height: '100vh', border: 'solid 1px rgb(188, 198, 207)' }}
       className='d-flex flex-column align-items-center justify-content-start'
     >
       <div id='avatar' className='mt-5 pt-5 mb-3'>
@@ -57,7 +57,7 @@ function SideBar(props) {
           xmlns='http://www.w3.org/2000/svg'
           width='70'
           height='70'
-          fill='currentColor'
+          fill='white'
           className='bi bi-person-circle'
           viewBox='0 0 16 16'
         >
@@ -70,8 +70,8 @@ function SideBar(props) {
         </svg>
       </div>
 
-      <p className='text-center '>UserName</p>
-      <p className='text-center'>Plan Type</p>
+      <p className='text-center' style={{color: 'white'}}>UserName</p>
+      <p className='text-center' style={{color: 'white'}}>Plan Type</p>
 
       <div id='totalUsers' className='mt-5' style={{ width: '80%' }}>
         <div className='d-flex justify-content-around mb-3'>
@@ -79,7 +79,7 @@ function SideBar(props) {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person-fill'
             viewBox='0 0 16 16'
           >
@@ -92,7 +92,7 @@ function SideBar(props) {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person-fill'
             viewBox='0 0 16 16'
           >
@@ -105,7 +105,7 @@ function SideBar(props) {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person-fill'
             viewBox='0 0 16 16'
           >
@@ -121,7 +121,7 @@ function SideBar(props) {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person'
             viewBox='0 0 16 16'
           >
@@ -134,7 +134,7 @@ function SideBar(props) {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person'
             viewBox='0 0 16 16'
           >
@@ -147,7 +147,7 @@ function SideBar(props) {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person'
             viewBox='0 0 16 16'
           >
@@ -163,7 +163,7 @@ function SideBar(props) {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person-fill'
             viewBox='0 0 16 16'
           >
@@ -176,7 +176,7 @@ function SideBar(props) {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person-fill'
             viewBox='0 0 16 16'
           >
@@ -189,7 +189,7 @@ function SideBar(props) {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person-fill'
             viewBox='0 0 16 16'
           >
@@ -200,8 +200,8 @@ function SideBar(props) {
           </svg>
         </div>
       </div>
-        <div className='d-flex flex-column align-items-center'>
-          <button onClick={switchTo} className='btn btn-warning'>{props.switchTo}</button>
+        <div className='d-flex flex-column align-items-center mt-5' style={{color: 'white'}}>
+          <button id='sideBarButton' onClick={switchTo} className='btn btn-outline-dark'>{props.switchTo}</button>
         </div>
 
     </div>
