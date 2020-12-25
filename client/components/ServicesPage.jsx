@@ -17,8 +17,9 @@ function ServicesPage() {
           <ServicesDisplay />
                 
         <div className='d-flex justify-content-end align-items-end'>
-          <button className='btn btn-success mr-2'>+ Add Service</button>
-          {/*service icon should be removed from screen once row gets deleted from db*/}
+          <button className='btn btn-secondary mr-2'>- Remove Service</button>
+          <button className='btn btn-primary mr-2'>+ Add Service</button>
+          
         </div>
       </div>
     </div>

@@ -200,8 +200,9 @@ function SideBar(props) {
           </svg>
         </div>
       </div>
-        <div className='d-flex flex-column align-items-center mt-5' style={{color: 'white'}}>
-          <button id='sideBarButton' onClick={switchTo} className='btn btn-outline-dark'>{props.switchTo}</button>
+        <h4 id='logo'>FamPass</h4>
+        <div className='d-flex flex-column align-items-center mt-5'>
+          <button id='sideBarButton' onClick={switchTo} className='btn btn-outline-light'>{props.switchTo}</button>
         </div>
 
     </div>

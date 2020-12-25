@@ -39,7 +39,7 @@ function FamilyDisplay() {
   return (
     <div id="familyName"
       className='d-flex mb-5 justify-content-around'
-      style={{ backgroundColor: 'rgb(196, 196, 196)', borderRadius: '15px' }}>
+      style={{ border: 'solid 1px rgb(13, 59, 102)', borderRadius: '15px' }}>
       <div className='py-2 col-4'>
         <div className='d-flex align-items-center'>
           <p className='mt-3 mr-3'>
@@ -53,7 +53,8 @@ function FamilyDisplay() {
         <button className='btn btn-secondary btn-sm'>- Remove family</button>
       </div>
 
-      <div id="members" className=' py-4 col-4'>
+      <div id="members" className=' py-4 col-4'
+        style={{color: 'rgb(13, 59, 102)'}}>
         <div className='justify-content-around d-flex'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -100,13 +101,14 @@ function FamilyDisplay() {
         <p className='text-center mt-3'>Members</p>
         <div className='d-flex justify-content-end'>
           <div className='btn-group' role='group' aria-label='Side-by-side button group'>
-            <button className='btn btn-primary btn-sm mt-3'>+</button>
-           <button className='btn btn-secondary btn-sm mt-3'>-</button>
+            <button className='btn btn-primary btn-sm mt-4'>+</button>
+           <button className='btn btn-secondary btn-sm mt-4'>-</button>
           </div>
         </div>
       </div>
 
-      <div id="services" className='col-4 py-4 '>
+      <div id="services" className='col-4 py-4'
+      style={{ color: 'rgb(13, 59, 102)'}}>
         <div className='d-flex justify-content-around'>
           <svg
             xmlns='http://www.w3.org/2000/svg'

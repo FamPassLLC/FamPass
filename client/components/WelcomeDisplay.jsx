@@ -27,14 +27,14 @@ function WelcomeDisplay() {
   }
 
   return (
-    <div id="welcomeButtons" className='d-flex justify-content-center' style ={{margin: '10vw'}}>
+    <div id="welcomeButtons" className='d-flex justify-content-center' style ={{margin: '10vw', border: '0 1px 0 0'}}>
       
       <div className='flex-column align-item-center mx-5' id="viewMyFamilies">
         <h5 className='text-center mb-4' style={{color: 'grey'}}>View my families</h5>
         <button 
         onClick={redirectToFamily}
         className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-auto justify-content-around'
-        style={{ width: '15vw', height: '15vw', borderRadius: '15px' }}
+        style={{ width: '15vw', height: '15vw', borderRadius: '15px', border: 'solid 1px lightgrey'}}
         > Image 1
         </button>
       </div>
@@ -44,7 +44,7 @@ function WelcomeDisplay() {
         <button
         onClick={redirectToServices}
         className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-auto justify-content-around'
-        style={{ width: '15vw', height: '15vw', borderRadius: '15px' }}
+        style={{ width: '15vw', height: '15vw', borderRadius: '15px', border: 'solid 1px lightgrey' }}
         >Image 2
         </button>
       </div>
