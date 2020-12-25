@@ -12,7 +12,7 @@ function FamilyPage() {
       </div>
       <div className='col-8 mt-5 pt-5 ml-5'>
         <FamilyDisplay />
-        <FamilyDisplay />
+        {/* <FamilyDisplay /> */}
         <div className='d-flex justify-content-end'>
           <button className='btn btn-success mr-2'>Add family +</button>
           <button className='btn btn-danger '>Remove family -</button>

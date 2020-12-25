@@ -24,7 +24,7 @@ router.post('/addfamily', familiesController.addFamily, (req, res) => {
 
 // request to rename a family
 router.put('/renamefamily', familiesController.renameFamily, (req, res) => {
-  res.send('family updated');
+  res.status(200).send('family updated');
 });
 
 // request to delete a family

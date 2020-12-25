@@ -11,10 +11,13 @@ const familiesController = {};
 // on frontend, filter by family_name or username depending on use
 familiesController.getFamilies = (req, res, next) => {
   // gets table with all users/families because GET requests generally lack bodies
-  const queryString = `SELECT f.family_name, lu.username 
-    FROM family_members fm
-    JOIN families f ON f._id = fm.family_id
-    JOIN local_users lu ON lu._id = fm.local_user_id`;
+  //   const queryString = `SELECT f.family_name, lu.username
+  //     FROM family_members fm
+  //     JOIN families f ON f._id = fm.family_id
+  //     JOIN local_users lu ON lu._id = fm.local_user_id`;
+
+  //changed query to get all family names
+  const queryString = `SELECT * FROM families;`;
   db.query(queryString)
     .then((data) => {
       res.locals.familyDetails = data.rows; // data.rows is arr of objs with format { family_name, username }
@@ -52,7 +55,7 @@ familiesController.renameFamily = (req, res, next) => {
   // get new family name and existing family name from request body
   const { newName, family_name } = req.body;
   // check whether updated family name already exists
-  db.query('SELECT * FROM families WHERE (family_name = $1', [newName])
+  db.query('SELECT * FROM families WHERE (family_name = $1);', [newName])
     .then((data) => {
       if (data.rows.length) {
         res.locals.status = 'new family name already exists';
@@ -73,7 +76,7 @@ familiesController.renameFamily = (req, res, next) => {
 familiesController.deleteFamily = (req, res, next) => {
   // request body should include family name
   const { family_name } = req.body;
-  const queryString = `DELETE FROM families WHERE (family_name = $1)`;
+  const queryString = `DELETE FROM families WHERE (family_name = $1);`;
   const values = [family_name];
   // query
   db.query(queryString, values)
