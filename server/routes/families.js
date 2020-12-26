@@ -36,7 +36,6 @@ router.delete(
   familiesController.deleteFamily,
   (req, res) => {
     const { family_name } = res.locals;
-    console.log(res.locals.family_name);
     res.status(200).json(family_name);
   }
 );

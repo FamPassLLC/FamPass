@@ -9,9 +9,7 @@ function FamilyDisplay(props) {
     const family_name = props.family_name;
     axios
       .delete(`/api/families/deletefamily/${family_name}`)
-      .then((result) => {
-        console.log(result);
-      })
+      .then((result) => {})
       .catch((err) => console.log(err));
   };
   //display total number of users in family
