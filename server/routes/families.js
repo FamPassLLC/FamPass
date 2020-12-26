@@ -20,7 +20,8 @@ router.get('/', familiesController.getFamilies, (req, res) => {
 
 // request to create a family
 router.post('/addfamily', familiesController.addFamily, (req, res) => {
-  res.send('adding families');
+  const { family_name } = res.locals;
+  res.status(200).json(family_name);
 });
 
 // request to rename a family
@@ -30,9 +31,15 @@ router.put('/renamefamily', familiesController.renameFamily, (req, res) => {
 });
 
 // request to delete a family
-router.delete('/deletefamily', familiesController.deleteFamily, (req, res) => {
-  res.send('family deleted');
-});
+router.delete(
+  '/deletefamily/:family_name',
+  familiesController.deleteFamily,
+  (req, res) => {
+    const { family_name } = res.locals;
+    console.log(res.locals.family_name);
+    res.status(200).json(family_name);
+  }
+);
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++
 // +++ Methods to add/remove users from families +++

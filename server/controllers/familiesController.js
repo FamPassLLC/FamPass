@@ -42,6 +42,7 @@ familiesController.addFamily = (req, res, next) => {
         // query
         db.query(queryString, values).then((data) => {
           res.locals.status = 'family created';
+          res.locals.data = family_name;
           return next();
         });
       }
@@ -74,14 +75,15 @@ familiesController.renameFamily = (req, res, next) => {
 
 // request to delete a family
 familiesController.deleteFamily = (req, res, next) => {
-  // request body should include family name
-  const { family_name } = req.body;
+  // request params should include family name
+  const { family_name } = req.params;
   const queryString = `DELETE FROM families WHERE (family_name = $1);`;
   const values = [family_name];
   // query
   db.query(queryString, values)
     .then((data) => {
       res.locals.status = 'family deleted';
+      res.locals.family_name = family_name;
       return next();
     })
     .catch((err) => next({ err }));
