@@ -4,16 +4,14 @@ import { render } from 'react-dom';
 import axios from 'axios';
 
 function SideBar(props) {
-  
-  //button to switch to other location 
+  //button to switch to other location
   const history = useHistory();
   const switchTo = (e) => {
     e.preventDefault();
-    if(props.switchTo === 'View shared services')
-    history.push('/services')
-    else history.push('/family')
-  }
-  
+    if (props.switchTo === 'View shared services') history.push('/services');
+    else history.push('/family');
+  };
+
   //generate profile icon
   const [profileIcon, setProfileIcon] = useState('');
   // useEffect(() => {
@@ -49,7 +47,11 @@ function SideBar(props) {
 
   return (
     <div
-      style={{ backgroundColor: 'rgb(13, 59, 102)', height: '100vh', border: 'solid 1px rgb(188, 198, 207)' }}
+      style={{
+        backgroundColor: 'rgb(13, 59, 102)',
+        height: '100vh',
+        border: 'solid 1px rgb(188, 198, 207)',
+      }}
       className='d-flex flex-column align-items-center justify-content-start'
     >
       <div id='avatar' className='mt-5 pt-5 mb-3'>
@@ -70,8 +72,12 @@ function SideBar(props) {
         </svg>
       </div>
 
-      <p className='text-center' style={{color: 'white'}}>UserName</p>
-      <p className='text-center' style={{color: 'white'}}>Plan Type</p>
+      <p className='text-center' style={{ color: 'white' }}>
+        UserName
+      </p>
+      <p className='text-center' style={{ color: 'white' }}>
+        Plan Type
+      </p>
 
       <div id='totalUsers' className='mt-5' style={{ width: '80%' }}>
         <div className='d-flex justify-content-around mb-3'>
@@ -200,11 +206,18 @@ function SideBar(props) {
           </svg>
         </div>
       </div>
-        <h4 id='logo'>FamPass</h4>
-        <div className='d-flex flex-column align-items-center mt-5'>
-          <button id='sideBarButton' onClick={switchTo} className='btn btn-outline-light'>{props.switchTo}</button>
-        </div>
-
+      <h4 id='logo' className='text-warning mt-5'>
+        FamPass
+      </h4>
+      <div className='d-flex flex-column align-items-center mt-5'>
+        <button
+          id='sideBarButton'
+          onClick={switchTo}
+          className='btn btn-outline-light'
+        >
+          {props.switchTo}
+        </button>
+      </div>
     </div>
   );
 }
