@@ -1,13 +1,23 @@
 import React, { Component, useEffect, useState } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, useHistory } from 'react-router-dom';
 import { render } from 'react-dom';
 import axios from 'axios';
 
-function SideBar() {
+function SideBar(props) {
+  
+  //button to switch to other location 
+  const history = useHistory();
+  const switchTo = (e) => {
+    e.preventDefault();
+    if(props.switchTo === 'View shared services')
+    history.push('/services')
+    else history.push('/family')
+  }
+  
   //generate profile icon
   const [profileIcon, setProfileIcon] = useState('');
   // useEffect(() => {
-  //   Axios
+  //   axios
   //   .get('')
   //   .then(result => {
   //     setProfileIcon(result.data);
@@ -18,7 +28,7 @@ function SideBar() {
   //after logged in, extract username from db
   const [userName, setUserName] = useState('');
   // useEffect(() => {
-  //   Axios
+  //   axios
   //   .get('')
   //   .then(result => {
   //     setUserName(result.data);
@@ -29,7 +39,7 @@ function SideBar() {
   //extract total number of user profile icons
   const [totalUsers, setTotalUsers] = useState([]);
   // useEffect(() => {
-  //   Axios
+  //   axios
   //   .get('')
   //   .then(result => {
   //     setTotalUsers(result.data);
@@ -39,7 +49,7 @@ function SideBar() {
 
   return (
     <div
-      style={{ backgroundColor: 'rgb(165, 43, 43)', height: '100vh' }}
+      style={{ backgroundColor: 'rgb(13, 59, 102)', height: '100vh', border: 'solid 1px rgb(188, 198, 207)' }}
       className='d-flex flex-column align-items-center justify-content-start'
     >
       <div id='avatar' className='mt-5 pt-5 mb-3'>
@@ -47,7 +57,7 @@ function SideBar() {
           xmlns='http://www.w3.org/2000/svg'
           width='70'
           height='70'
-          fill='currentColor'
+          fill='white'
           className='bi bi-person-circle'
           viewBox='0 0 16 16'
         >
@@ -60,8 +70,8 @@ function SideBar() {
         </svg>
       </div>
 
-      <p className='text-center '>UserName</p>
-      <p className='text-center'>Plan Type</p>
+      <p className='text-center' style={{color: 'white'}}>UserName</p>
+      <p className='text-center' style={{color: 'white'}}>Plan Type</p>
 
       <div id='totalUsers' className='mt-5' style={{ width: '80%' }}>
         <div className='d-flex justify-content-around mb-3'>
@@ -69,7 +79,7 @@ function SideBar() {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person-fill'
             viewBox='0 0 16 16'
           >
@@ -82,7 +92,7 @@ function SideBar() {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person-fill'
             viewBox='0 0 16 16'
           >
@@ -95,7 +105,7 @@ function SideBar() {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person-fill'
             viewBox='0 0 16 16'
           >
@@ -111,7 +121,7 @@ function SideBar() {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person'
             viewBox='0 0 16 16'
           >
@@ -124,7 +134,7 @@ function SideBar() {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person'
             viewBox='0 0 16 16'
           >
@@ -137,7 +147,7 @@ function SideBar() {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person'
             viewBox='0 0 16 16'
           >
@@ -153,7 +163,7 @@ function SideBar() {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person-fill'
             viewBox='0 0 16 16'
           >
@@ -166,7 +176,7 @@ function SideBar() {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person-fill'
             viewBox='0 0 16 16'
           >
@@ -179,7 +189,7 @@ function SideBar() {
             xmlns='http://www.w3.org/2000/svg'
             width='30'
             height='30'
-            fill='currentColor'
+            fill='white'
             className='bi bi-person-fill'
             viewBox='0 0 16 16'
           >
@@ -190,9 +200,11 @@ function SideBar() {
           </svg>
         </div>
       </div>
-      <div style={{ marginTop: '30vh' }}>
-        <button className='btn btn-warning'>View shared services</button>
-      </div>
+        <h4 id='logo'>FamPass</h4>
+        <div className='d-flex flex-column align-items-center mt-5'>
+          <button id='sideBarButton' onClick={switchTo} className='btn btn-outline-light'>{props.switchTo}</button>
+        </div>
+
     </div>
   );
 }

@@ -19,7 +19,8 @@ function FamilyPage() {
   return (
     <div className='d-flex'>
       <div className='col-3 px-0'>
-        <SideBar />
+        <SideBar switchTo='View shared services' />
+
       </div>
       <div className='col-8 mt-5 pt-5 ml-5'>
         {families.map((data) => {
@@ -29,8 +30,8 @@ function FamilyPage() {
         })}
 
         <div className='d-flex justify-content-end'>
-          <button className='btn btn-success mr-2'>Add family +</button>
-          <button className='btn btn-danger '>Remove family -</button>
+          <button className='btn btn-outline-primary mr-2'>Join family</button>
+          <button className='btn btn-primary'>+ Add Family</button>
         </div>
       </div>
     </div>
