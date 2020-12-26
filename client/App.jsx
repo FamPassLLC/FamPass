@@ -14,7 +14,6 @@ import SignUpPage from './components/Signup';
 class App extends Component {
   constructor() {
     super();
-
     this.state = {};
   }
 
@@ -23,12 +22,12 @@ class App extends Component {
     <Switch>
       <Router>
         <div>
-        {/* <Route exact path="/">
-          <LoginPage></LoginPage>
-        </Route> */}
-          <Route exact path="/">
+        <Route exact path="/">
+          <LoginPage ></LoginPage>
+        </Route>
+          {/* <Route exact path="/">
             <WelcomePage/>
-          </Route>
+          </Route> */}
 
           <Route exact path="/family">
             <FamilyPage/>
@@ -37,7 +36,6 @@ class App extends Component {
           <Route exact path="/services">
             <ServicesPage/>
           </Route>
-          
         </div>
       </Router>
     </Switch>

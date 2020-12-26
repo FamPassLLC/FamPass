@@ -44,7 +44,7 @@ usersController.verifyUser = (req, res, next) => {
   // query DB to get user with provided username
   db.query(`SELECT * FROM local_users WHERE (username = $1);`, param)
     .then((data) => {
-      if (!data) { // if no such user, stop here
+      if (data.rows.length === 0) { // if no such user, stop here
         res.locals.status = 'No user found';
         return next();
       } else { // if there is such a user, compare password with encrypted password
