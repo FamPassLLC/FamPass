@@ -2,7 +2,18 @@ import React, { Component, useState, useEffect } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { render } from 'react-dom';
 import FamilyName from './FamilyName';
+import axios from 'axios';
 function FamilyDisplay(props) {
+  //handle delete family
+  const handleDelete = (props) => {
+    const family_name = props.family_name;
+    axios
+      .delete(`/api/families/deletefamily/${family_name}`)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.log(err));
+  };
   //display total number of users in family
   const [totalUsers, displayTotalUsers] = useState('');
   //   useEffect(() => {
@@ -34,7 +45,12 @@ function FamilyDisplay(props) {
         <FamilyName family_name={props.family_name} />
         <p className='mb-0 mt-2'># of users</p>
         <p># of services</p>
-        <button className='btn btn-secondary btn-sm'>- Remove family</button>
+        <button
+          className='btn btn-secondary btn-sm'
+          onClick={() => handleDelete(props)}
+        >
+          - Remove family
+        </button>
       </div>
 
       <div
