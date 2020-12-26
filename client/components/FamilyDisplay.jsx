@@ -2,18 +2,7 @@ import React, { Component, useState, useEffect } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { render } from 'react-dom';
 import FamilyName from './FamilyName';
-function FamilyDisplay() {
-  //edit family name if necessary, update family name in db
-  const [familyName, updateFamilyName] = useState('');
-  //   useEffect(() => {
-  //     Axios
-  //     .get('')
-  //     .then(result => {
-  //       updateFamilyName(result.data);
-  //     })
-  //     .catch(err => console.log(err));
-  //   }, []);
-
+function FamilyDisplay(props) {
   //display total number of users in family
   const [totalUsers, displayTotalUsers] = useState('');
   //   useEffect(() => {
@@ -43,7 +32,7 @@ function FamilyDisplay() {
       style={{ backgroundColor: 'rgb(196, 196, 196)', borderRadius: '15px' }}
     >
       <div className='py-4 col-4'>
-        <FamilyName />
+        <FamilyName family_name={props.family_name} />
         <p className='mb-0 mt-2'># of users</p>
         <p># of services</p>
       </div>

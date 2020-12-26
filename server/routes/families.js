@@ -14,7 +14,8 @@ const router = express.Router();
 // request to retrieve families (for display on landing page)
 // also use this method to get members to display within families
 router.get('/', familiesController.getFamilies, (req, res) => {
-  res.status(200).send(res.locals.familyDetails); // arr of objs { family_name, username }
+  const families = res.locals.familyDetails;
+  res.status(200).json(families); // arr of objs { family_name, username }
 });
 
 // request to create a family
@@ -24,7 +25,8 @@ router.post('/addfamily', familiesController.addFamily, (req, res) => {
 
 // request to rename a family
 router.put('/renamefamily', familiesController.renameFamily, (req, res) => {
-  res.status(200).send('family updated');
+  const { newName } = res.locals;
+  res.status(200).json(newName);
 });
 
 // request to delete a family

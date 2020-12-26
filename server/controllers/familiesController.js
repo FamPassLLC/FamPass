@@ -21,7 +21,6 @@ familiesController.getFamilies = (req, res, next) => {
   db.query(queryString)
     .then((data) => {
       res.locals.familyDetails = data.rows; // data.rows is arr of objs with format { family_name, username }
-      console.log(data.rows);
       return next();
     })
     .catch((err) => next({ err }));
@@ -65,6 +64,7 @@ familiesController.renameFamily = (req, res, next) => {
         const queryString = `UPDATE families SET family_name = $1 WHERE (family_name = $2)`;
         db.query(queryString, values).then((data) => {
           res.locals.status = 'family name updated';
+          res.locals.newName = newName;
           return next();
         });
       }
