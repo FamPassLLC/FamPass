@@ -18,6 +18,8 @@ function FamilyPage(props) {
   const [families, setFamilies] = useState([]);
   //state to keep track of the current family name (retrieved from database for display)
   const [family_name, setFamilyName] = useState('');
+  //state to keep track of the current family password
+  const [family_password, setFamilyPassword] = useState('');
 
   useEffect(() => {
     //retrieve current family name from db to display
@@ -43,23 +45,28 @@ function FamilyPage(props) {
     const local_user = props.local_user.username;
 
     axios
-      .all([
-        axios.post('/api/families/addfamily/', { family_name }),
-        axios.post('/api/families/add-family-member/', {
-          family_name,
-          local_user,
-        }),
-      ])
-      .then(
-        axios.spread((...responses) =>
-          console.log('responses from axios post requests', responses)
-        )
-      )
+      .post('/api/families/addfamily', { family_name, family_password })
+      .then((result) => console.log(result))
       .catch((err) => console.log(err));
+    setTimeout(() => {
+      console.log(family_name, family_password, local_user);
+      axios
+        .post('/api/families/add-family-member', {
+          family_name,
+          family_password,
+          local_user,
+        })
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err));
+    }, 1000);
   };
-  const handleInput = ({ target: { value } }) => {
+  const handleFamilyNameInput = ({ target: { value } }) => {
     //listen for new input and assign that to new name
     setFamilyName(value);
+  };
+  const handleFamilyPasswordInput = ({ target: { value } }) => {
+    //listen for new input and assign that to new password
+    setFamilyPassword(value);
   };
   return (
     <div className='d-flex'>
@@ -102,7 +109,17 @@ function FamilyPage(props) {
                     type='text'
                     placeholder='Enter your family name...'
                     value={family_name}
-                    onChange={handleInput}
+                    onChange={handleFamilyNameInput}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Family Password</Form.Label>
+                  <Form.Control
+                    required
+                    type='password'
+                    placeholder='Enter your family password...'
+                    value={family_password}
+                    onChange={handleFamilyPasswordInput}
                   ></Form.Control>
                 </Form.Group>
                 <Button variant='primary' type='submit' onClick={handleClose}>
