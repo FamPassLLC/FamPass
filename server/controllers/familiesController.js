@@ -49,10 +49,9 @@ familiesController.addFamily = (req, res, next) => {
           res.locals.data = family_name;
           return next();
         });
-      };
-    )
-    .catch((err) => next({ err }));
-};
+      })}
+
+}).catch((err) => next({ err }));
 
 // request to modify family name (update request)
 familiesController.renameFamily = (req, res, next) => {
@@ -110,8 +109,10 @@ familiesController.addMember = (req, res, next) => {
       const family_id = data.rows[0]._id;
       // verify family password
       bcrypt.compare(family_password, data.rows[0].family_password, (err, result) => {
-        if (result === true) res.locals.
-      })
+        if (result === true) {
+          res.locals.status = true;
+          return next()
+        }})
 
       // second portion of first query: get _id from local_users table
       const firstQuery2 = `SELECT _id FROM local_users WHERE (username = $1)`;
