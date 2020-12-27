@@ -28,9 +28,5 @@ if (serviceLinks[link]) {
 //check if we need to kill tab and reopen same tab
 if (hidePasswordLinks[link]) {
 chrome.runtime.sendMessage({type: 'hidePassword', link}, (response) => {
-  console.log(response)
-  if (response.hidePassword) {
-    window.close();
-  }
 })
 }

@@ -54,16 +54,33 @@ function SignUpPage(props) {
     history.push('/home')
   }
     return (
-      <div>
-        <h1>Signup page</h1>
+      <div class='loginPage' class="text-center">
+        <br></br>
         <div>
-          <div id="nameAvailabiltiy" style={{visibility: state.visible, color: "red"}}>Username already in use
-          </div>
-          <form>
-            <input type="text" placeholder="Username" id="username" value={state.username} onChange={handleChange}></input>
-            <input type="password" placeholder="Password" id="password" value={state.password} onChange={handleChange}></input>
-            <button type="submit" onClick={sendDetailsToServer}>Sign up</button>
-          </form>
+        <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+          <div id="nameAvailabiltiy" style={{visibility: state.visible, color: "red"}}>Username already in use </div>
+          <form class="form-signin">
+            <label for="username" class="sr-only">Email address</label>
+            <input
+              type='text'
+              placeholder='Username'
+              class="form-control"
+              id='username'
+              value={state.username}
+              onChange={handleChange}
+              required autofocus>
+              </input>
+            <label for="password" class="sr-only">Password</label>
+            <input
+              type='password'
+              placeholder='Password'
+              id='password'
+              value={state.password}
+              onChange={handleChange}
+              class="form-control" required>
+            </input>
+            <button class="btn btn-lg btn-primary btn-block" type="button" onClick={sendDetailsToServer}>Sign Up</button>
+        </form>
         </div>
       </div>
     );

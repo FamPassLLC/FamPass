@@ -59,7 +59,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'hidePassword') {
     if (hidePassword) {
       hidePassword = false; 
-      sendResponse({hidePassword: true})
+      chrome.tabs.remove(sender.tab.id);
       chrome.tabs.create({ url: request.link })
     }
   }
