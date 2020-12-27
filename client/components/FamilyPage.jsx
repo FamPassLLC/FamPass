@@ -51,8 +51,8 @@ function FamilyPage(props) {
         }),
       ])
       .then(
-        axios.spread((result1, result2) =>
-          console.log(result1.data, result2.data)
+        axios.spread((...responses) =>
+          console.log('responses from axios post requests', responses)
         )
       )
       .catch((err) => console.log(err));
@@ -64,7 +64,10 @@ function FamilyPage(props) {
   return (
     <div className='d-flex'>
       <div className='col-3 px-0'>
-        <SideBar switchTo='View shared services' />
+        <SideBar
+          local_user={props.local_user.username}
+          switchTo='View shared services'
+        />
       </div>
       <div className='col-8 mt-5 pt-5 ml-5'>
         {families.map((data, i) => {
