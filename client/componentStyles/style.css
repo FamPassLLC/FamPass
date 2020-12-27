@@ -6,6 +6,9 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+h1 {
+  top:50px;
+}
 
 #sideBarButton {
   margin-top: 15%;
@@ -20,4 +23,28 @@ body {
   color: white;
   display: flex;
   justify-content: center;
+}
+#loginPage {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
 }

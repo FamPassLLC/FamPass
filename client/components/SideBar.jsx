@@ -73,7 +73,7 @@ function SideBar(props) {
       </div>
 
       <p className='text-center' style={{ color: 'white' }}>
-        {props.currentUser}
+        {props.local_user.userName}
       </p>
       <p className='text-center' style={{ color: 'white' }}>
         Plan Type

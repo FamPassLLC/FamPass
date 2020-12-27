@@ -1,5 +1,6 @@
 const db = require('../models/dbModels');
 const { Base64 } = require('js-base64');
+const { HotModuleReplacementPlugin } = require('webpack');
 
 const servicesController = {};
 
@@ -95,5 +96,13 @@ servicesController.deleteServicesLogin = (req, res, next) => {
     })
     .catch((err) => next({ err }));
 };
+
+servicesController.getLoginExt = (req, res, next) => {
+  // const username = req.body.user
+  // const password = req.body.password
+  res.locals.userInfo = {username: 'blah', password: 'blah'};
+  return next();
+  //query
+}
 
 module.exports = servicesController;

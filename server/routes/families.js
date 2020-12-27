@@ -13,7 +13,7 @@ const router = express.Router();
 
 // request to retrieve families (for display on landing page)
 // also use this method to get members to display within families
-router.get('/', familiesController.getFamilies, (req, res) => {
+router.get('/allfamilies', familiesController.getFamilies, (req, res) => {
   const families = res.locals.familyDetails;
   res.status(200).json(families); // arr of objs { family_name, username }
 });
@@ -36,7 +36,6 @@ router.delete(
   familiesController.deleteFamily,
   (req, res) => {
     const { family_name } = res.locals;
-    console.log(res.locals.family_name);
     res.status(200).json(family_name);
   }
 );
@@ -47,7 +46,8 @@ router.delete(
 
 // request to add to a family
 router.post('/add-family-member', familiesController.addMember, (req, res) => {
-  res.send('family member added');
+  const { data } = res.locals;
+  res.status(200).json(data);
 });
 
 // request to delete users from a family

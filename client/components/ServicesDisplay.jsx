@@ -72,7 +72,7 @@ function ServicesDisplay(props) {
           <a href='#' className='badge badge-secondary'>Family:{props.family_name}</a>
           <button className='btn btn-secondary btn-sm 
           d-flex justify-content-start mt-1'
-          onClick={() => handleDelete(props)}
+          // onClick={() => handleDelete(props)}
           >
             - Remove Service
           </button>

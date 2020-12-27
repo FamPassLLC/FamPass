@@ -30,9 +30,6 @@ app.use((req, res) => {
   res.status(404).send('Not found');
 });
 
-
-
-
 // global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
