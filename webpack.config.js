@@ -10,6 +10,7 @@ module.exports = {
   },
   devServer: {
     publicPath: '/',
+    historyApiFallback: true,
     contentBase: path.resolve(__dirname, 'build'),
     host: 'localhost',
     port: 8080,

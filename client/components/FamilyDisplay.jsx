@@ -1,20 +1,17 @@
 import React, { Component, useState, useEffect } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { render } from 'react-dom';
+import FamilyName from './FamilyName';
 import axios from 'axios';
-
-function FamilyDisplay() {
-  //edit family name if necessary, update family name in db
-  const [familyName, updateFamilyName] = useState('');
-  //   useEffect(() => {
-  //     axios
-  //     .get('')
-  //     .then(result => {
-  //       updateFamilyName(result.data);
-  //     })
-  //     .catch(err => console.log(err));
-  //   }, []);
-
+function FamilyDisplay(props) {
+  //handle delete family
+  const handleDelete = (props) => {
+    const family_name = props.family_name;
+    axios
+      .delete(`/api/families/deletefamily/${family_name}`)
+      .then((result) => {})
+      .catch((err) => console.log(err));
+  };
   //display total number of users in family
   const [totalUsers, displayTotalUsers] = useState('');
   //   useEffect(() => {
@@ -37,23 +34,28 @@ function FamilyDisplay() {
   //   }, []);
 
   return (
-    <div id="familyName"
+    <div
+      id='familyName'
       className='d-flex mb-5 justify-content-around'
-      style={{ backgroundColor: 'rgb(196, 196, 196)', borderRadius: '15px' }}>
-      <div className='py-2 col-4'>
-        <div className='d-flex align-items-center'>
-          <p className='mt-3 mr-3'>
-            {/* update name to be dynamic from backend */}
-            <strong>Family Name</strong>
-          </p>
-          <button className='btn btn-outline-primary'>Edit</button>
-        </div>
+      style={{ backgroundColor: 'rgb(196, 196, 196)', borderRadius: '15px' }}
+    >
+      <div className='py-4 col-4'>
+        <FamilyName family_name={props.family_name} />
         <p className='mb-0 mt-2'># of users</p>
         <p># of services</p>
-        <button className='btn btn-secondary btn-sm'>- Remove family</button>
+        <button
+          className='btn btn-secondary btn-sm'
+          onClick={() => handleDelete(props)}
+        >
+          - Remove family
+        </button>
       </div>
 
-      <div id="members" className=' py-4 col-4'>
+      <div
+        id='members'
+        className=' py-4 col-4'
+        style={{ color: 'rgb(13, 59, 102)' }}
+      >
         <div className='justify-content-around d-flex'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -99,14 +101,22 @@ function FamilyDisplay() {
         </div>
         <p className='text-center mt-3'>Members</p>
         <div className='d-flex justify-content-end'>
-          <div className='btn-group' role='group' aria-label='Side-by-side button group'>
-            <button className='btn btn-primary btn-sm mt-3'>+</button>
-           <button className='btn btn-secondary btn-sm mt-3'>-</button>
+          <div
+            className='btn-group'
+            role='group'
+            aria-label='Side-by-side button group'
+          >
+            <button className='btn btn-primary btn-sm mt-4'>+</button>
+            <button className='btn btn-secondary btn-sm mt-4'>-</button>
           </div>
         </div>
       </div>
 
-      <div id="services" className='col-4 py-4 '>
+      <div
+        id='services'
+        className='col-4 py-4'
+        style={{ color: 'rgb(13, 59, 102)' }}
+      >
         <div className='d-flex justify-content-around'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -155,12 +165,15 @@ function FamilyDisplay() {
         </div>
         <p className='text-center mt-3'>Shared Services</p>
         <div className='d-flex justify-content-end'>
-          <div className='btn-group' role='group' aria-label='Side-by-side button group'>
+          <div
+            className='btn-group'
+            role='group'
+            aria-label='Side-by-side button group'
+          >
             <button className='btn btn-primary btn-sm mt-3'>+</button>
-           <button className='btn btn-secondary btn-sm mt-3'>-</button>
+            <button className='btn btn-secondary btn-sm mt-3'>-</button>
           </div>
         </div>
-        
       </div>
     </div>
   );

@@ -1,11 +1,13 @@
 const path = require('path');
 const bodyParser = require('body-parser');
+
 const express = require('express');
 
 // require in routers
 
 const usersRouter = require('../server/routes/users');
 const servicesRouter = require('../server/routes/services');
+const familiesRouter = require('../server/routes/families');
 
 const app = express();
 
@@ -13,9 +15,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/testing', (req, res) => {
-  res.send('testing');
-});
 // routes for users creation and verification (login page)
 
 app.use('/api/users', usersRouter);
@@ -23,13 +22,13 @@ app.use('/api/users', usersRouter);
 // routes for handling login info for services
 app.use('/api/services', servicesRouter);
 
+// routes for handling requests regarding family composition
+app.use('/api/families', familiesRouter);
+
 // middleware for page not found
 app.use((req, res) => {
   res.status(404).send('Not found');
 });
-
-
-
 
 // global error handler
 app.use((err, req, res, next) => {

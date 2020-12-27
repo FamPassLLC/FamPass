@@ -53,7 +53,7 @@ function ServicesDisplay() {
       <div id="provider">
         <button
         className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-4 justify-content-around'
-        style={{ width: '15vw', height: '15vw', borderRadius: '15px' }}
+        style={{ width: '15vw', height: '15vw', border: 'solid 1px lightgrey', borderRadius: '15px' }}
         > Netflix
         </button>
         <div className='d-flex mt-2 mb-4 mx-4 align-items-start'>
@@ -64,7 +64,7 @@ function ServicesDisplay() {
       <div id="provider">
         <button
         className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-4 justify-content-around'
-        style={{ width: '15vw', height: '15vw', borderRadius: '15px' }}
+        style={{ width: '15vw', height: '15vw', border: 'solid 1px lightgrey', borderRadius: '15px'}}
         > Spotify
         </button>
         <div className='d-flex mt-2 mb-4 mx-4 align-items-start'>
