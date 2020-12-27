@@ -3,6 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import axios from 'axios';
 function FamilyMembers(props) {
+  const [newMember, setNewMember] = useState('');
+  console.log(props);
+  const handleInput = ({ target: { value } }) => {
+    //listen for new input and assign that to new name
+    setNewMember(value);
+  };
+  useEffect(() => {
+    const family_name = props.family_name;
+    axios.post('/api/families/add-family-member/', {
+      family_name,
+      local_user: newMember,
+    });
+  }, []);
   return (
     <div
       id='members'
@@ -82,8 +95,8 @@ function FamilyMembers(props) {
                     required
                     type='text'
                     placeholder='Enter your new family member..'
-                    value={props.local_user}
-                    onChange={props.handleInput}
+                    value={newMember}
+                    onChange={handleInput}
                   ></Form.Control>
                 </Form.Group>
                 <Button

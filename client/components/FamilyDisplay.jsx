@@ -14,8 +14,8 @@ function FamilyDisplay(props) {
   const [show, setShow] = useState(false);
   //state to keep track of the form for changing family name being filled out or empty
   const [validated, setValidated] = useState(false);
-  //state to keep track of total families
-  const [newMember, setNewMember] = useState('');
+  // //state to keep track of total families
+  // const [newMember, setNewMember] = useState('');
 
   //submit new name to database
   const handleSubmit = (e) => {
@@ -27,10 +27,10 @@ function FamilyDisplay(props) {
       setValidated(true);
     }
   };
-  const handleInput = ({ target: { value } }) => {
-    //listen for new input and assign that to new name
-    setNewMember(value);
-  };
+  // const handleInput = ({ target: { value } }) => {
+  //   //listen for new input and assign that to new name
+  //   setNewMember(value);
+  // };
 
   //handle delete family
   const handleDelete = (props) => {
