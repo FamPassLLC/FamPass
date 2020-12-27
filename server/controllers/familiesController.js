@@ -38,11 +38,10 @@ familiesController.addFamily = (req, res, next) => {
         const queryString = `INSERT INTO families (family_name) VALUES ($1)`;
         const values = [family_name];
         // query
-        db.query(queryString, values)
-          .then((data) => {
-            res.locals.status = 'family created';
-            return next();
-          });
+        db.query(queryString, values).then((data) => {
+          res.locals.status = 'family created';
+          return next();
+        });
       }
     })
     .catch((err) => next({ err }));
@@ -59,13 +58,12 @@ familiesController.renameFamily = (req, res, next) => {
         res.locals.status = 'new family name already exists';
         return next();
       } else {
-        const values = [newName, family_name]
+        const values = [newName, family_name];
         const queryString = `UPDATE families SET family_name = $1 WHERE (family_name = $2)`;
-        db.query(queryString, values)
-          .then((data) => {
-            res.locals.status = 'family name updated';
-            return next();
-          })
+        db.query(queryString, values).then((data) => {
+          res.locals.status = 'family name updated';
+          return next();
+        });
       }
     })
     .catch((err) => next({ err }));
@@ -104,27 +102,28 @@ familiesController.addMember = (req, res, next) => {
       // second portion of first query: get _id from local_users table
       const firstQuery2 = `SELECT _id FROM local_users WHERE (username = $1)`;
       const firstQuery2Value = [local_user];
-      db.query(firstQuery2, firstQuery2Value)
-        .then((data2) => {
-          const local_user_id = data2.rows[0]._id;
-          // next query: check whether family already contains the specified member
-          const newMemberInfo = [family_id, local_user_id];
-          db.query(`SELECT * FROM family_members WHERE (family_id = $1 AND local_user_id = $2)`, newMemberInfo)
-            .then((data3) => {
-              if (data3.rows.length) { // if user is already a family member, this will evalute to true
-                res.locals.status = 'member already in family';
-                return next();
-              } else {
-                // final query: add member to family
-                const lastQuery = `INSERT INTO family_members (family_id, local_user_id) VALUES ($1, $2)`;
-                db.query(lastQuery, newMemberInfo)
-                  .then(() => {
-                    res.locals.status = 'new member added';
-                    return next();
-                  });
-              }
+      db.query(firstQuery2, firstQuery2Value).then((data2) => {
+        const local_user_id = data2.rows[0]._id;
+        // next query: check whether family already contains the specified member
+        const newMemberInfo = [family_id, local_user_id];
+        db.query(
+          `SELECT * FROM family_members WHERE (family_id = $1 AND local_user_id = $2)`,
+          newMemberInfo
+        ).then((data3) => {
+          if (data3.rows.length) {
+            // if user is already a family member, this will evalute to true
+            res.locals.status = 'member already in family';
+            return next();
+          } else {
+            // final query: add member to family
+            const lastQuery = `INSERT INTO family_members (family_id, local_user_id) VALUES ($1, $2)`;
+            db.query(lastQuery, newMemberInfo).then(() => {
+              res.locals.status = 'new member added';
+              return next();
             });
+          }
         });
+      });
     })
     .catch((err) => next({ err }));
 };
@@ -143,18 +142,17 @@ familiesController.removeMember = (req, res, next) => {
       // second portion of first query: get _id from local_users table
       const firstQuery2 = `SELECT _id FROM local_users WHERE (username = $1)`;
       const firstQuery2Value = [local_user];
-      db.query(firstQuery2, firstQuery2Value)
-        .then((data2) => {
-          const local_user_id = data2.rows[0]._id;
-          // final query: remove specified user from family
-          const finalQuery = 'DELETE FROM family_members WHERE (family_id = $1 AND local_user_id = $2)';
-          const memberInfo = [family_id, local_user_id];
-          db.query(finalQuery, memberInfo)
-            .then(() => {
-              res.locals.status = 'family member removed';
-              return next();
-            });
+      db.query(firstQuery2, firstQuery2Value).then((data2) => {
+        const local_user_id = data2.rows[0]._id;
+        // final query: remove specified user from family
+        const finalQuery =
+          'DELETE FROM family_members WHERE (family_id = $1 AND local_user_id = $2)';
+        const memberInfo = [family_id, local_user_id];
+        db.query(finalQuery, memberInfo).then(() => {
+          res.locals.status = 'family member removed';
+          return next();
         });
+      });
     })
     .catch((err) => next({ err }));
 };
@@ -173,19 +171,21 @@ familiesController.shareService = (req, res, next) => {
   db.query(firstQuery1, firstQuery1Value)
     .then((data) => {
       const family_id = data.rows[0]._id;
-      const firstQuery2 = 'SELECT _id FROM service_login WHERE (service = $1 AND local_user = $2)';
+      const firstQuery2 =
+        'SELECT _id FROM service_login WHERE (service = $1 AND local_user = $2)';
       const firstQuery2Values = [service, local_user];
-      db.query(firstQuery2, firstQuery2Values)
-        .then((data2) => {
-          const service_login_id = data2.rows[0]._id;
-          // final query: add to family_logins table
-          const serviceInfo = [family_id, service_login_id];
-          db.query('INSERT INTO family_logins (family_id, service_login_id) VALUES ($1, $2)', serviceInfo)
-            .then(() => {
-              res.locals.status = 'service shared';
-              return next();
-            });
+      db.query(firstQuery2, firstQuery2Values).then((data2) => {
+        const service_login_id = data2.rows[0]._id;
+        // final query: add to family_logins table
+        const serviceInfo = [family_id, service_login_id];
+        db.query(
+          'INSERT INTO family_logins (family_id, service_login_id) VALUES ($1, $2)',
+          serviceInfo
+        ).then(() => {
+          res.locals.status = 'service shared';
+          return next();
         });
+      });
     })
     .catch((err) => next({ err }));
 };
@@ -200,19 +200,21 @@ familiesController.stopSharingService = (req, res, next) => {
   db.query(firstQuery1, firstQuery1Value)
     .then((data) => {
       const family_id = data.rows[0]._id;
-      const firstQuery2 = 'SELECT _id FROM service_login WHERE (service = $1 AND local_user = $2)';
+      const firstQuery2 =
+        'SELECT _id FROM service_login WHERE (service = $1 AND local_user = $2)';
       const firstQuery2Values = [service, local_user];
-      db.query(firstQuery2, firstQuery2Values)
-        .then((data2) => {
-          const service_login_id = data2.rows[0]._id;
-          // final query: delete from family_logins table
-          const serviceInfo = [family_id, service_login_id];
-          db.query('DELETE FROM family_logins WHERE (family_id = $1 AND service_login_id = $2)', serviceInfo)
-            .then(() => {
-              res.locals.status = 'sharing stopped';
-              return next();
-            });
+      db.query(firstQuery2, firstQuery2Values).then((data2) => {
+        const service_login_id = data2.rows[0]._id;
+        // final query: delete from family_logins table
+        const serviceInfo = [family_id, service_login_id];
+        db.query(
+          'DELETE FROM family_logins WHERE (family_id = $1 AND service_login_id = $2)',
+          serviceInfo
+        ).then(() => {
+          res.locals.status = 'sharing stopped';
+          return next();
         });
+      });
     })
     .catch((err) => next({ err }));
 };

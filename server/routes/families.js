@@ -42,9 +42,13 @@ router.post('/add-family-member', familiesController.addMember, (req, res) => {
 });
 
 // request to delete users from a family
-router.delete('/remove-family-member', familiesController.removeMember, (req, res) => {
-  res.send('family member removed');
-});
+router.delete(
+  '/remove-family-member',
+  familiesController.removeMember,
+  (req, res) => {
+    res.send('family member removed');
+  }
+);
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++ Methods to associate services with families +++
@@ -56,8 +60,12 @@ router.post('/share-service', familiesController.shareService, (req, res) => {
 });
 
 // stop sharing service with family
-router.delete('/stop-sharing-service', familiesController.stopSharingService, (req, res) => {
-  res.send('sharing stopped');
-});
+router.delete(
+  '/stop-sharing-service',
+  familiesController.stopSharingService,
+  (req, res) => {
+    res.send('sharing stopped');
+  }
+);
 
 module.exports = router;

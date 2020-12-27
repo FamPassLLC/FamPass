@@ -20,7 +20,8 @@ servicesController.addServicesLogin = (req, res, next) => {
     verifyParams
   )
     .then((data) => {
-      if (data.rows.length) { // if something is returned, then the entry already exists
+      if (data.rows.length) {
+        // if something is returned, then the entry already exists
         res.locals.status = 'service exists';
         return next();
       } else {
@@ -58,7 +59,8 @@ servicesController.getServicesLogin = (req, res, next) => {
 
 // allows user to update saved password for third-party service
 servicesController.updateServicesLogin = (req, res, next) => {
-  let { // body will contain user's name, the service, existing PW, and new PW
+  let {
+    // body will contain user's name, the service, existing PW, and new PW
     local_user,
     service,
     service_password,

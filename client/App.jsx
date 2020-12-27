@@ -15,34 +15,7 @@ class App extends Component {
       <div>
         <FamilyPage />
       </div>
-      // <Switch>
-      /* <Route exact path='/'>
-          <div> Julie is the best interior designer!
-              <div> Derek Lam models in wedding dresses!</div>
-          </div>
-          </Route> */
-
-      /* <Route path='/'>
-          <div>
-            <LoginPage />
-          </div>  
-          </Route> */
-
-      /* <Route path='/'>
-          <div>
-            <CreateAccountPage />
-          </div>  
-          </Route> */
-
-      // <Route exact path='/'>
-
-      /* </Route>
-      </Switch> */
     );
   }
-
-  // const styles = {
-
-  // }
 }
 export default App;

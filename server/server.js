@@ -7,7 +7,7 @@ const express = require('express');
 
 const usersRouter = require('../server/routes/users');
 const servicesRouter = require('../server/routes/services');
-const familiesRouter = require('../server/routes/families')
+const familiesRouter = require('../server/routes/families');
 
 const app = express();
 
@@ -15,12 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/testing', (req, res) => {
-  res.send('testing');
-});
 // routes for users creation and verification (login page)
-
-//routes for users creation and verification
 
 app.use('/api/users', usersRouter);
 
