@@ -14,3 +14,10 @@ body {
 #viewMyFamilies {
   border: solid 0 1px 0 0 darkgrey;
 }
+
+#logo {
+  font-family: 'Permanent Marker', cursive;
+  color: white;
+  display: flex;
+  justify-content: center;
+}

@@ -23,7 +23,9 @@ function LoginPage(props) {
       const payload ={
         "username": state.username,
         "password": state.password,
-      }
+      };
+      props.userInput(state.username);
+
       fetch('http://localhost:8080/api/users/signin', {
         method: 'POST',
         headers: {
@@ -52,7 +54,7 @@ function LoginPage(props) {
     history.push('/signup')
   }
     return (
-      <div id="loginPage" class>
+      <div id="loginPage">
         <h1>Login page</h1>
         <div>
           <form>

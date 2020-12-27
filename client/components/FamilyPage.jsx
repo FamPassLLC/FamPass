@@ -5,7 +5,8 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import FamilyDisplay from './FamilyDisplay';
 import SideBar from './SideBar';
 import axios from 'axios';
-function FamilyPage() {
+
+function FamilyPage(props) {
   //switch states of modal being closed or open
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -24,6 +25,7 @@ function FamilyPage() {
     axios
       .get('api/families/')
       .then((result) => {
+        console.log(result.data)
         setFamilies(result.data);
       })
       .catch((err) => console.log(err));
@@ -38,7 +40,7 @@ function FamilyPage() {
       //confirm form input is filled out
       setValidated(true);
     }
-    //POST requet to add a family
+    //POST request to add a family
     axios
       .post('/api/families/addfamily/', { family_name })
       .then((result) => {
@@ -53,7 +55,7 @@ function FamilyPage() {
   return (
     <div className='d-flex'>
       <div className='col-3 px-0'>
-        <SideBar switchTo='View shared services' />
+        <SideBar switchTo='View shared services' currentUser={props.currentUser} />
       </div>
       <div className='col-8 mt-5 pt-5 ml-5'>
         {families.map((data) => {

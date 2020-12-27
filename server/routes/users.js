@@ -20,8 +20,11 @@ router.post('/signup', usersController.createUsers, (req, res) => {
 // request to sign into an existing account
 router.post('/signin', usersController.verifyUser, (req, res) => {
   if(res.locals.status === true) res.status(200);
-  else {
+  else if (res.locals.status === false) {
     res.status(401);
+  }
+  else {
+    res.status(409)
   }
   return res.send('Hello there')
 });

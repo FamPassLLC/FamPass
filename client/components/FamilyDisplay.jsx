@@ -3,6 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import { render } from 'react-dom';
 import FamilyName from './FamilyName';
 import axios from 'axios';
+
 function FamilyDisplay(props) {
   //handle delete family
   const handleDelete = (props) => {
@@ -39,10 +40,10 @@ function FamilyDisplay(props) {
     <div
       id='familyName'
       className='d-flex mb-5 justify-content-around'
-      style={{ backgroundColor: 'rgb(196, 196, 196)', borderRadius: '15px' }}
+      style={{ border: 'solid 1px rgb(13, 59, 102)', borderRadius: '15px' }}
     >
-      <div className='py-4 col-4'>
-        <FamilyName family_name={props.family_name} />
+      <div className='py-2 col-4'>
+        <FamilyName family_name={props.family_name} className="mt-3 mr-3"/>
         <p className='mb-0 mt-2'># of users</p>
         <p># of services</p>
         <button
@@ -172,8 +173,8 @@ function FamilyDisplay(props) {
             role='group'
             aria-label='Side-by-side button group'
           >
-            <button className='btn btn-primary btn-sm mt-3'>+</button>
-            <button className='btn btn-secondary btn-sm mt-3'>-</button>
+            <button className='btn btn-primary btn-sm mt-4'>+</button>
+            <button className='btn btn-secondary btn-sm mt-4'>-</button>
           </div>
         </div>
       </div>
