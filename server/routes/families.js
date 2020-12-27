@@ -46,7 +46,8 @@ router.delete(
 
 // request to add to a family
 router.post('/add-family-member', familiesController.addMember, (req, res) => {
-  res.send('family member added');
+  const { data } = res.locals;
+  res.status(200).json(data);
 });
 
 // request to delete users from a family

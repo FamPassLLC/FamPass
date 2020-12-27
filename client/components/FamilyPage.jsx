@@ -5,7 +5,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import FamilyDisplay from './FamilyDisplay';
 import SideBar from './SideBar';
 import axios from 'axios';
-function FamilyPage() {
+function FamilyPage(props) {
   //switch states of modal being closed or open
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -38,12 +38,23 @@ function FamilyPage() {
       //confirm form input is filled out
       setValidated(true);
     }
-    //POST requet to add a family
+
+    //POST request to add an user to the family just created and create a family in the database
+    const local_user = props.local_user.username;
+
     axios
-      .post('/api/families/addfamily/', { family_name })
-      .then((result) => {
-        console.log(result.data);
-      })
+      .all([
+        axios.post('/api/families/addfamily/', { family_name }),
+        axios.post('/api/families/add-family-member/', {
+          family_name,
+          local_user,
+        }),
+      ])
+      .then(
+        axios.spread((result1, result2) =>
+          console.log(result1.data, result2.data)
+        )
+      )
       .catch((err) => console.log(err));
   };
   const handleInput = ({ target: { value } }) => {
@@ -56,13 +67,14 @@ function FamilyPage() {
         <SideBar switchTo='View shared services' />
       </div>
       <div className='col-8 mt-5 pt-5 ml-5'>
-        {families.map((data) => {
+        {families.map((data, i) => {
           return (
             <FamilyDisplay
               setFamilies={setFamilies}
               families={families}
               family_name={data.family_name}
-              key={data._id}
+              key={i}
+              local_user={props.local_user}
             />
           );
         })}

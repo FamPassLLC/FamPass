@@ -11,13 +11,11 @@ const familiesController = {};
 // on frontend, filter by family_name or username depending on use
 familiesController.getFamilies = (req, res, next) => {
   // gets table with all users/families because GET requests generally lack bodies
-  //   const queryString = `SELECT f.family_name, lu.username
-  //     FROM family_members fm
-  //     JOIN families f ON f._id = fm.family_id
-  //     JOIN local_users lu ON lu._id = fm.local_user_id`;
+  const queryString = `SELECT f.family_name, lu.username
+      FROM family_members fm
+      JOIN families f ON f._id = fm.family_id
+      JOIN local_users lu ON lu._id = fm.local_user_id`;
 
-  //changed query to get all family names
-  const queryString = `SELECT * FROM families;`;
   db.query(queryString)
     .then((data) => {
       res.locals.familyDetails = data.rows; // data.rows is arr of objs with format { family_name, username }
@@ -124,6 +122,7 @@ familiesController.addMember = (req, res, next) => {
             const lastQuery = `INSERT INTO family_members (family_id, local_user_id) VALUES ($1, $2)`;
             db.query(lastQuery, newMemberInfo).then(() => {
               res.locals.status = 'new member added';
+              res.locals.data = { family_name, local_user };
               return next();
             });
           }
