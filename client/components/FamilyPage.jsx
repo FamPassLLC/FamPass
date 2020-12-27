@@ -5,6 +5,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import FamilyDisplay from './FamilyDisplay';
 import SideBar from './SideBar';
 import axios from 'axios';
+
 function FamilyPage(props) {
   //switch states of modal being closed or open
   const handleClose = () => setShow(false);
@@ -24,12 +25,13 @@ function FamilyPage(props) {
   useEffect(() => {
     //retrieve current family name from db to display
     axios
-      .get('api/families/')
+      .get('api/families/allfamilies')
       .then((result) => {
+        console.log(result.data);
         setFamilies(result.data);
       })
       .catch((err) => console.log(err));
-  }, [families]);
+  }, []);
 
   //submit new name to database
   const handleSubmit = (e) => {
@@ -40,9 +42,10 @@ function FamilyPage(props) {
       //confirm form input is filled out
       setValidated(true);
     }
+    //POST request to add a family
 
     //POST request to add an user to the family just created and create a family in the database
-    const local_user = props.local_user.username;
+    const local_user = props.local_user;
 
     axios
       .post('/api/families/addfamily', { family_name, family_password })
@@ -58,7 +61,7 @@ function FamilyPage(props) {
         })
         .then((result) => console.log(result))
         .catch((err) => console.log(err));
-    }, 1000);
+    }, 5000);
   };
   const handleFamilyNameInput = ({ target: { value } }) => {
     //listen for new input and assign that to new name

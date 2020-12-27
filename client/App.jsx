@@ -10,6 +10,7 @@ import SignUpPage from './components/Signup';
 
 function App() {
   const [local_user, setLocalUser] = useState('');
+  const [extFamily, setExtFamily] = useState([]);
 
   return (
     <Switch>
@@ -17,6 +18,9 @@ function App() {
         <div>
           <Route exact path='/'>
             <LoginPage setLocalUser={setLocalUser}></LoginPage>
+          </Route>
+          <Route exact path='/signup'>
+            <SignUpPage></SignUpPage>
           </Route>
           {/* after verification, login page routes to /home that renders WelcomePage */}
           <Route exact path='/home'>
@@ -28,7 +32,11 @@ function App() {
           </Route>
 
           <Route exact path='/services'>
-            <ServicesPage />
+            <ServicesPage
+              local_user={local_user}
+              extFamily={extFamily}
+              setExtFamily={setExtFamily}
+            />
           </Route>
         </div>
       </Router>

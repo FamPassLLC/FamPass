@@ -206,7 +206,7 @@ function SideBar(props) {
           </svg>
         </div>
       </div>
-      <h4 id='logo' className='text-warning mt-5'>
+      <h4 id='logo' className='mt-5'>
         FamPass
       </h4>
       <div className='d-flex flex-column align-items-center mt-5'>

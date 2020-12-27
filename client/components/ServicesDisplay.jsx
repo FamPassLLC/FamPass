@@ -3,7 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import { render } from 'react-dom';
 import axios from 'axios';
 
-function ServicesDisplay() {
+function ServicesDisplay(props) {
   //add service provider
   const [serviceProvider, setServiceProvider] = useState('');
   //   useEffect(() => {
@@ -15,7 +15,7 @@ function ServicesDisplay() {
   //     .catch(err => console.log(err));
   //   }, []);
 
-  //show user sharing corresponding service
+  //show external family sharing corresponding service
   const [userShare, setUserShare] = useState('');
   //   useEffect(() => {
   //     axios
@@ -27,6 +27,18 @@ function ServicesDisplay() {
   //   }, []);
 
   //remove service
+  // function removeService(props) {
+  //   //handle delete service
+  //   const handleDelete = props => {
+  //     const service_name = props.service_name;
+  //     axios
+  //       .delete('/delete-service-password')
+  //       .then(result => {
+  //         console.log(result);
+  //       })
+  //       .catch(err => console.log(err));
+  //   };
+
   const [xService, setXService] = useState('');
   //   useEffect(() => {
   //     axios
@@ -48,32 +60,27 @@ function ServicesDisplay() {
   //   }, []);
 
   return (
-    <div id="serviceProviders" className='d-flex'>
+    <div id='serviceProviders' className='d-flex'>
       
-      <div id="provider">
+      <div id='provider'>
         <button
         className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-4 justify-content-around'
-        style={{ width: '15vw', height: '15vw', border: 'solid 1px lightgrey', borderRadius: '15px' }}
-        > Netflix
+        style={{ width: '15vw', height: '15vw', border: 'solid 1px rgb(13, 59, 102)', borderRadius: '15px' }}
+        > {props.service}
         </button>
-        <div className='d-flex mt-2 mb-4 mx-4 align-items-start'>
-          <a href="#" className="badge badge-secondary">User</a>
+        <div className='mt-2 mb-4 mx-4 align-items-start'>
+          <a href='#' className='badge badge-secondary'>Family:{props.family_name}</a>
+          <button className='btn btn-secondary btn-sm 
+          d-flex justify-content-start mt-1'
+          // onClick={() => handleDelete(props)}
+          >
+            - Remove Service
+          </button>
         </div>
-      </div>
 
-      <div id="provider">
-        <button
-        className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-4 justify-content-around'
-        style={{ width: '15vw', height: '15vw', border: 'solid 1px lightgrey', borderRadius: '15px'}}
-        > Spotify
-        </button>
-        <div className='d-flex mt-2 mb-4 mx-4 align-items-start'>
-          <a href="#" className="badge badge-secondary">User</a>
-        </div>
       </div>
-      
-
     </div>
-  );
-}
+    );
+  }
+
 export default ServicesDisplay;

@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function WelcomeDisplay(props) {
   //display logged in username
-  const local_user = props.local_user.username;
+  const local_user = props.local_user;
 
   const history = useHistory();
   const redirectToFamily = (e) => {
@@ -38,7 +38,7 @@ function WelcomeDisplay(props) {
             border: 'solid 1px lightgrey',
           }}
         >
-          {' '}
+          
           Image 1
         </button>
       </div>
