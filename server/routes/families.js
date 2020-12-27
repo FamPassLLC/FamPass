@@ -14,23 +14,31 @@ const router = express.Router();
 // request to retrieve families (for display on landing page)
 // also use this method to get members to display within families
 router.get('/', familiesController.getFamilies, (req, res) => {
-  res.status(200).send(res.locals.familyDetails); // arr of objs { family_name, username }
+  const families = res.locals.familyDetails;
+  res.status(200).json(families); // arr of objs { family_name, username }
 });
 
 // request to create a family
 router.post('/addfamily', familiesController.addFamily, (req, res) => {
-  res.send('adding families');
+  const { family_name } = res.locals;
+  res.status(200).json(family_name);
 });
 
 // request to rename a family
 router.put('/renamefamily', familiesController.renameFamily, (req, res) => {
-  res.send('family updated');
+  const { newName } = res.locals;
+  res.status(200).json(newName);
 });
 
 // request to delete a family
-router.delete('/deletefamily', familiesController.deleteFamily, (req, res) => {
-  res.send('family deleted');
-});
+router.delete(
+  '/deletefamily/:family_name',
+  familiesController.deleteFamily,
+  (req, res) => {
+    const { family_name } = res.locals;
+    res.status(200).json(family_name);
+  }
+);
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++
 // +++ Methods to add/remove users from families +++
@@ -38,7 +46,8 @@ router.delete('/deletefamily', familiesController.deleteFamily, (req, res) => {
 
 // request to add to a family
 router.post('/add-family-member', familiesController.addMember, (req, res) => {
-  res.send('family member added');
+  const { data } = res.locals;
+  res.status(200).json(data);
 });
 
 // request to delete users from a family

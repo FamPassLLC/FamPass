@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    background-color: rgb(13, 59, 102);
+}
+
+#logo {
+    font-family: 'Permanent Marker', cursive;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+#login {
+    font-family: 'Roboto';
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: fit-content;
+    height: fit-content;
+    margin: 3vw;
+    
+}
+
+#userName {
+    display: flex;
+    justify-content: flex-start;
+    margin: 5vw;
+}
+
+#passWord {
+    margin: 5vw 0vw 5vw 0vw;
+}
+
+#button {
+    margin: 1vw 0vw 5vw 0vw;
+}

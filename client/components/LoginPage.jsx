@@ -1,42 +1,82 @@
-import React, { Component } from "react";
-import { Switch, Route, Link } from 'react-router-dom';
-import { render } from "react-dom";
+import React, { useState } from 'react';
+import { Switch, Route, Link, useHistory } from 'react-router-dom';
+import { render } from 'react-dom';
+import { data } from 'jquery';
 
-class LoginPage extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            
-        };
-
-        //bind family button to go to members page
+function LoginPage(props) {
+  const history = useHistory();
+  const [state, setState] = useState({
+    username: '',
+    password: '',
+  });
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+  //this function submits log in info to server
+  const sendDetailsToServer = (e) => {
+    e.preventDefault();
+    if (state.username.length && state.password.length) {
+      const payload = {
+        username: state.username,
+        password: state.password,
+      };
+      fetch('http://localhost:8080/api/users/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      }).then((res) => {
+        if (res.status === 200) {
+          setState((prevState) => ({
+            ...prevState,
+            Authentication: 'true',
+          }));
+          redirectToHome();
+          props.setLocalUser(state);
+        }
+      });
+    } else {
+      props.error('Please enter valid username and password');
     }
-
-
-    //fetch from database family name(s), members, services
-    componentDidMount() {
-        //fetch('');
-        //.then(res => res.json());
-        //.catch(err => console.log('Whoops, error!', err));
-      }
-
-    render() {
-        return (
-            <div>
-                <div className="login">
-                    <p>View my families</p> <p>View shared with me</p>
-                    <button>family image</button> <button>services image</button>
-                </div>
-
-                <div id="hello">
-                    <img src="" alt="Account holder profile icon"/>
-                    <div>Hello, username</div>
-                </div>
-            </div>
-        );
-    }  
+  };
+  const redirectToHome = () => {
+    history.push('/home');
+  };
+  // sign up button needs to be added to page and given this function
+  const redirectToSignUp = () => {
+    history.push('/signup');
+  };
+  return (
+    <div id='loginPage'>
+      <h1>Login page</h1>
+      <div>
+        <form>
+          <input
+            type='text'
+            placeholder='Username'
+            id='username'
+            value={state.username}
+            onChange={handleChange}
+          ></input>
+          <input
+            type='password'
+            placeholder='Password'
+            id='password'
+            value={state.password}
+            onChange={handleChange}
+          ></input>
+          <button type='submit' onClick={sendDetailsToServer}>
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
-
 
 export default LoginPage;
