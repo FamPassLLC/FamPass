@@ -1,13 +1,21 @@
 {
-    "manifest_version": 0,
-    "name": "scratch_proj",
+    "manifest_version": 2,
+    "name": "FamPass",
     "version": "0.1.0",
     "description": "A centralized website that allows users to share accounts without exposing their real passwords.",
+    "background" : {
+      "scripts" : ["background.js"]
+    },
     "content_scripts": [
        {
           "matches": ["<all_urls>"], 
-          "js": ["script.js"], 
-          "css": ["extension.css"]
+          "js": ["content.js"]
        }
+     ],
+     "browser_action": {
+        "default_popup": "popup.html"
+     },
+     "permissions": [
+        "activeTab"
      ]
    }

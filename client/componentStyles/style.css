@@ -1,5 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+#sideBarButton {
+  margin-top: 15%;
+}
+
+#viewMyFamilies {
+  border: solid 0 1px 0 0 darkgrey;
 }
