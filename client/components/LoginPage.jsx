@@ -54,16 +54,14 @@ function LoginPage(props) {
   };
   return (
     <div className='loginPage text-center'>
-      {/* <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img> */}
-      <br></br>
-      <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+      
       <div>
-        <form className="form-signin">
-        <label htmlFor="username" className="sr-only">Email address</label>
+        <form className="form-signin mt-5">
+        <label htmlFor="username" className="sr-only">Username</label>
           <input
             type='text'
             placeholder='Username'
-            className="form-control"
+            className="form-control mb-3"
             id='username'
             value={state.username}
             onChange={handleChange}
@@ -76,12 +74,15 @@ function LoginPage(props) {
             id='password'
             value={state.password}
             onChange={handleChange}
-            className="form-control" required>
+            className="form-control mb-3" required>
             </input>
           <button className="btn btn-lg btn-primary btn-block" type="button" onClick={sendDetailsToServer}>Sign in</button>
-          <a href="/signup">Sign Up</a>
+          <a href="/signup">Create account</a>
         </form>
       </div>
+
+      {/* <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img> */}
+      <h1 className="h3 mb-3 mt-5 font-weight-normal">- Welcome to FamPass -</h1>
     </div>
   );
 }

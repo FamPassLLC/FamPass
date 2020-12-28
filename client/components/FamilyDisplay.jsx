@@ -18,6 +18,10 @@ function FamilyDisplay(props) {
   const [show2, setShow2] = useState(false);
   //state to keep track of the form for changing family name being filled out or empty
   const [validated, setValidated] = useState(false);
+  //state to keep track of total users per family
+  const [familyusers, setFamilyUsers] = useState([]);
+  //state to keep track of total services per family
+  const [familyservices, setFamilyServices] = useState([]);
 
   //handle delete family
   const handleDelete = (props) => {
@@ -28,6 +32,32 @@ function FamilyDisplay(props) {
       .catch((err) => console.log(err));
   };
 
+  useEffect(() => {
+  //GET request to identify number of family members in one family
+    fetch('/api/families/allfamilies')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        const userFams = data
+          .filter((el) => el.family_name === props.family_name);
+        setFamilyUsers(userFams);
+      })
+  });
+
+  //GET request to identify number of services in one family
+  useEffect(() => {
+    fetch('/api/services/get-login-info')
+      .then((response) => {
+       return response.json();
+      })
+     .then((data) => {
+       const famServices = data
+        .filter((el) => el.family_name === props.family_name);
+      setFamilyServices(famServices);
+    })
+  })
+
   return (
     <div
       id='familyName'
@@ -35,9 +65,9 @@ function FamilyDisplay(props) {
       style={{ border: 'solid 1px rgb(13, 59, 102)', borderRadius: '15px' }}
     >
       <div className='py-2 col-4'>
-        <FamilyName family_name={props.family_name} className='mt-3 mr-3' />
-        <p className='mb-0 mt-2'># of users</p>
-        <p># of services</p>
+        <FamilyName family_name={props.family_name} className="mt-3 mr-3"/>
+        <p className='mb-0 mt-2'>{familyusers.length} user(s)</p>
+        <p>{familyservices.length} service(s)</p>
         <button
           className='btn btn-secondary btn-sm'
           onClick={() => handleDelete(props)}

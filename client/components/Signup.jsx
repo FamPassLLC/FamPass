@@ -38,6 +38,7 @@ function SignUpPage(props) {
               ...prevState,
             }))
             redirectToHome();
+            props.setLocalUser(state);
           }
           else {
             setState(prevState => ({
@@ -55,16 +56,14 @@ function SignUpPage(props) {
   }
     return (
       <div className='loginPage text-center'>
-        <br></br>
         <div>
-        <h1 className='h3 mb-3 font-weight-normal'>Create Account</h1>
-          <div id="nameAvailabiltiy" style={{visibility: state.visible, color: "red"}}>Username already in use </div>
-          <form className='form-signin'>
-            <label htmlFor='username' className='sr-only'>Email address</label>
+          <div id="nameAvailabiltiy" style={{visibility: state.visible, color: "red"}}>Username already in use.</div>
+          <form className='form-signin mt-5'>
+            <label htmlFor='username' className='sr-only'>Username</label>
             <input
               type='text'
               placeholder='Username'
-              className="form-control"
+              className="form-control mb-3"
               id='username'
               value={state.username}
               onChange={handleChange}
@@ -77,11 +76,12 @@ function SignUpPage(props) {
               id='password'
               value={state.password}
               onChange={handleChange}
-              className="form-control" required>
+              className="form-control mb-3" required>
             </input>
             <button className="btn btn-lg btn-primary btn-block" type="button" onClick={sendDetailsToServer}>Sign Up</button>
         </form>
         </div>
+          <h1 className='h3 mb-3 mt-5 font-weight-normal'>- Join FamPass -</h1>
       </div>
     );
 };

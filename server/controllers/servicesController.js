@@ -10,8 +10,7 @@ servicesController.addServicesLogin = (req, res, next) => {
   let service_logo;
   if (service === 'Netflix') {
     login_link = 'https://www.netflix.com/login';
-    service_logo =
-      'https://cdn.vox-cdn.com/thumbor/AwKSiDyDnwy_qoVdLPyoRPUPo00=/39x0:3111x2048/1400x1400/filters:focal(39x0:3111x2048):format(png)/cdn.vox-cdn.com/uploads/chorus_image/image/49901753/netflixlogo.0.0.png';
+    service_logo = 'https://cdn.vox-cdn.com/thumbor/AwKSiDyDnwy_qoVdLPyoRPUPo00=/39x0:3111x2048/1400x1400/filters:focal(39x0:3111x2048):format(png)/cdn.vox-cdn.com/uploads/chorus_image/image/49901753/netflixlogo.0.0.png';
   }
   // encode password to base64
   service_password = Base64.encode(service_password); // use atob() to decode in chrome extension
@@ -22,7 +21,7 @@ servicesController.addServicesLogin = (req, res, next) => {
     service_username,
     service_password,
     login_link,
-    service_logo,
+    service_logo
   ];
   // values for first query - to determine whether login info already exists
   const verifyParams = [local_user, service];

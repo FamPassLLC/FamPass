@@ -20,7 +20,7 @@ function App() {
             <LoginPage setLocalUser={setLocalUser}></LoginPage>
           </Route>
           <Route exact path='/signup'>
-            <SignUpPage></SignUpPage>
+            <SignUpPage setLocalUser={setLocalUser} />
           </Route>
           {/* after verification, login page routes to /home that renders WelcomePage */}
           <Route exact path='/home'>

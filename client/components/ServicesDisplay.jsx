@@ -4,50 +4,7 @@ import { render } from 'react-dom';
 import axios from 'axios';
 
 function ServicesDisplay(props) {
-  //add service provider
-  const [serviceProvider, setServiceProvider] = useState('');
-  //   useEffect(() => {
-  //     axios
-  //     .get('')
-  //     .then(result => {
-  //       setServiceProvider(result.data);
-  //     })
-  //     .catch(err => console.log(err));
-  //   }, []);
 
-  //show external family sharing corresponding service
-  const [userShare, setUserShare] = useState('');
-  //   useEffect(() => {
-  //     axios
-  //     .get('')
-  //     .then(result => {
-  //       setUserShare(result.data);
-  //     })
-  //     .catch(err => console.log(err));
-  //   }, []);
-
-  //remove service
-  // function removeService(props) {
-  //   //handle delete service
-  //   const handleDelete = props => {
-  //     const service_name = props.service_name;
-  //     axios
-  //       .delete('/delete-service-password')
-  //       .then(result => {
-  //         console.log(result);
-  //       })
-  //       .catch(err => console.log(err));
-  //   };
-
-  const [xService, setXService] = useState('');
-  //   useEffect(() => {
-  //     axios
-  //     .get('')
-  //     .then(result => {
-  //       setXService(result.data);
-  //     })
-  //     .catch(err => console.log(err));
-  //   }, []);
 
   //open service on its webpage
   const [openService, setOpenService] = useState('');
