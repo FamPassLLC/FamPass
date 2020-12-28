@@ -28,7 +28,7 @@ function FamilyServices(props) {
     e.preventDefault();
     const family_name = props.family_name;
     const local_user = props.local_user;
-
+    console.log(service, service_username);
     axios
       .post('/api/services/', {
         local_user,
@@ -39,6 +39,7 @@ function FamilyServices(props) {
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
     setTimeout(() => {
+      console.log(service);
       axios
         .post('/api/families/share-service', {
           family_name,
