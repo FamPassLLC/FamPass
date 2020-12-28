@@ -86,7 +86,11 @@ function FamilyMembers(props) {
           />
         </svg>
       </div>
-      <p className='text-center mt-3'>Members</p>
+      {/* display all users in the fam here */}
+      <div>
+        <p className='text-center mt-3'>Members</p>
+      </div>
+      {/*****************************************/}
       <div className='d-flex justify-content-end'>
         <div
           className='btn-group'
@@ -95,11 +99,11 @@ function FamilyMembers(props) {
         >
           <Button
             variant='btn btn-primary btn-sm mt-4'
-            onClick={props.handleShow}
+            onClick={props.handleShow1}
           >
             +
           </Button>
-          <Modal show={props.show} onHide={props.handleClose}>
+          <Modal show={props.show1} onHide={props.handleClose1}>
             <Modal.Header>
               <Modal.Title>Add new family member</Modal.Title>
             </Modal.Header>
@@ -133,7 +137,7 @@ function FamilyMembers(props) {
                 <Button
                   variant='primary'
                   type='submit'
-                  onClick={props.handleClose}
+                  onClick={props.handleClose1}
                 >
                   Update
                 </Button>
@@ -141,19 +145,20 @@ function FamilyMembers(props) {
             </Modal.Body>
 
             <Modal.Footer>
-              <Button variant='secondary' onClick={props.handleClose}>
+              <Button variant='secondary' onClick={props.handleClose1}>
                 Close
               </Button>
             </Modal.Footer>
           </Modal>
 
+          {/********* handle remove a member **********/}
           <Button
             variant='btn btn-secondary btn-sm mt-4'
-            onClick={props.handleShow}
+            onClick={props.handleShow2}
           >
             -
           </Button>
-          <Modal show={props.show} onHide={props.handleClose}>
+          <Modal show={props.show2} onHide={props.handleClose2}>
             <Modal.Header>
               <Modal.Title>Remove a family member</Modal.Title>
             </Modal.Header>
@@ -187,7 +192,7 @@ function FamilyMembers(props) {
                 <Button
                   variant='primary'
                   type='submit'
-                  onClick={props.handleClose}
+                  onClick={props.handleClose2}
                 >
                   Update
                 </Button>
@@ -195,7 +200,7 @@ function FamilyMembers(props) {
             </Modal.Body>
 
             <Modal.Footer>
-              <Button variant='secondary' onClick={props.handleClose}>
+              <Button variant='secondary' onClick={props.handleClose2}>
                 Close
               </Button>
             </Modal.Footer>

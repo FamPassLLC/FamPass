@@ -8,11 +8,13 @@ import axios from 'axios';
 
 function FamilyPage(props) {
   //switch states of modal being closed or open
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  const handleClose1 = () => setShow1(false);
+  const handleShow1 = () => setShow1(true);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
   //state to keep track of the modal being open or closed
-  const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
   //state to keep track of the form for changing family name being filled out or empty
   const [validated, setValidated] = useState(false);
   //state to keep track of total families
@@ -106,10 +108,10 @@ function FamilyPage(props) {
 
         <div className='d-flex justify-content-end'>
           {/************* handle join family ****************/}
-          <Button variant='btn btn-outline-primary mr-2' onClick={handleShow}>
+          <Button variant='btn btn-outline-primary mr-2' onClick={handleShow1}>
             Join family
           </Button>
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show1} onHide={handleClose1}>
             <Modal.Header>
               <Modal.Title>Join A Family</Modal.Title>
             </Modal.Header>
@@ -140,14 +142,14 @@ function FamilyPage(props) {
                     onChange={handleFamilyPasswordInput}
                   ></Form.Control>
                 </Form.Group>
-                <Button variant='primary' type='submit' onClick={handleClose}>
+                <Button variant='primary' type='submit' onClick={handleClose1}>
                   Join family
                 </Button>
               </Form>
             </Modal.Body>
 
             <Modal.Footer>
-              <Button variant='secondary' onClick={handleClose}>
+              <Button variant='secondary' onClick={handleClose1}>
                 Close
               </Button>
             </Modal.Footer>
@@ -155,11 +157,11 @@ function FamilyPage(props) {
 
           {/************* handle add family ****************/}
 
-          <Button variant='btn btn-primary' onClick={handleShow}>
+          <Button variant='btn btn-primary' onClick={handleShow2}>
             + Add Family
           </Button>
 
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show2} onHide={handleClose2}>
             <Modal.Header>
               <Modal.Title>Create Your Family</Modal.Title>
             </Modal.Header>
@@ -186,14 +188,14 @@ function FamilyPage(props) {
                     onChange={handleFamilyPasswordInput}
                   ></Form.Control>
                 </Form.Group>
-                <Button variant='primary' type='submit' onClick={handleClose}>
+                <Button variant='primary' type='submit' onClick={handleClose2}>
                   Create family
                 </Button>
               </Form>
             </Modal.Body>
 
             <Modal.Footer>
-              <Button variant='secondary' onClick={handleClose}>
+              <Button variant='secondary' onClick={handleClose2}>
                 Close
               </Button>
             </Modal.Footer>

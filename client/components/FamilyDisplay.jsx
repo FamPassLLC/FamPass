@@ -7,26 +7,17 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import axios from 'axios';
 
 function FamilyDisplay(props) {
-  console.log('familyDisplay', props);
   //switch states of modal being closed or open
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose1 = () => setShow1(false);
+  const handleShow1 = () => setShow1(true);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
 
   //state to keep track of the modal being open or closed
-  const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
   //state to keep track of the form for changing family name being filled out or empty
   const [validated, setValidated] = useState(false);
-
-  //submit new name to database
-  const handleSubmit = (e) => {
-    const form = e.currentTarget;
-    e.preventDefault();
-    //if the form is not filled out, not allow to submit
-    if (form.checkValidity() === false) {
-      //confirm form input is filled out
-      setValidated(true);
-    }
-  };
 
   //handle delete family
   const handleDelete = (props) => {
@@ -58,11 +49,13 @@ function FamilyDisplay(props) {
       <FamilyMembers
         local_user={props.local_user}
         family_name={props.family_name}
-        handleShow={handleShow}
-        show={show}
-        handleClose={handleClose}
+        handleShow1={handleShow1}
+        handleShow2={handleShow2}
+        show1={show1}
+        show2={show2}
+        handleClose1={handleClose1}
+        handleClose2={handleClose2}
         validated={validated}
-        handleSubmit={handleSubmit}
       />
 
       <div
