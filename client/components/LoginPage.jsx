@@ -37,7 +37,7 @@ function LoginPage(props) {
             Authentication: 'true',
           }));
           redirectToHome();
-          props.setLocalUser(state);
+          props.setLocalUser({username: state.username.toLowerCase(), password: state.password.toLowerCase()});
         }
       });
     } else {

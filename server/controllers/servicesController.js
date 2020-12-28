@@ -100,7 +100,7 @@ servicesController.deleteServicesLogin = (req, res, next) => {
 servicesController.getLoginExt = (req, res, next) => {
   // const username = req.body.user
   // const password = req.body.password
-  res.locals.userInfo = {username: 'vqfurniture@hotmail.com', password: 'kevin95lam'};
+  res.locals.userInfo = {username: 'blah', password: 'blah'};
   return next();
   //query
 }

@@ -10,6 +10,8 @@ import SignUpPage from './components/Signup';
 
 function App() {
   const [local_user, setLocalUser] = useState('');
+  
+
   return (
     <Switch>
       <Router>
