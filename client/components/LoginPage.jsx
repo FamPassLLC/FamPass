@@ -54,9 +54,7 @@ function LoginPage(props) {
   };
   return (
     <div className='loginPage text-center'>
-      {/* <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img> */}
-      <br></br>
-      <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+      
       <div>
         <form className="form-signin">
         <label htmlFor="username" className="sr-only">Email address</label>
@@ -79,9 +77,12 @@ function LoginPage(props) {
             className="form-control" required>
             </input>
           <button className="btn btn-lg btn-primary btn-block" type="button" onClick={sendDetailsToServer}>Sign in</button>
-          <a href="/signup">Sign Up</a>
+          <a href="/signup">Create account</a>
         </form>
       </div>
+
+      {/* <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img> */}
+      <h1 className="h3 mb-3 font-weight-normal">- Welcome to FamPass -</h1>
     </div>
   );
 }
