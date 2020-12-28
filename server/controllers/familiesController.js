@@ -101,6 +101,7 @@ familiesController.deleteFamily = (req, res, next) => {
 familiesController.addMember = (req, res, next) => {
   // get data from body and put into variables - body will include family name, family password, and local username of user to add
   const { family_name, family_password, local_user } = req.body;
+
   // first queries - get family_id and user_id corresponding to input data
   // get _id from families table
   const firstQuery1 = `SELECT _id, family_password FROM families WHERE (family_name = $1)`;
@@ -122,6 +123,7 @@ familiesController.addMember = (req, res, next) => {
             const firstQuery2Value = [local_user];
             db.query(firstQuery2, firstQuery2Value).then((data2) => {
               const local_user_id = data2.rows[0]._id;
+
               // next query: check whether family already contains the specified member
               const newMemberInfo = [family_id, local_user_id];
               db.query(

@@ -33,6 +33,20 @@ function FamilyPage(props) {
       .catch((err) => console.log(err));
   }, []);
 
+  // useEffect(() => {
+  //   //retrieve current family name from db to display
+  //   axios
+  //     .get('api/families/allfamilies')
+  //     .then((result) => {
+  //       const userFams = result.data
+  //         .filter((el) => el.username === props.local_user.username)
+  //         .map((el) => el.family_name);
+  //       console.log(userFams);
+  //       setFamilies(userFams);
+  //       setFamilyName(userFams);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
   //submit new name to database
   const handleSubmit = (e) => {
     const form = e.currentTarget;
@@ -52,6 +66,7 @@ function FamilyPage(props) {
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
     setTimeout(() => {
+      const local_user = props.local_user.username;
       console.log(family_name, family_password, local_user);
       axios
         .post('/api/families/add-family-member', {
@@ -61,7 +76,7 @@ function FamilyPage(props) {
         })
         .then((result) => console.log(result))
         .catch((err) => console.log(err));
-    }, 5000);
+    }, 2000);
   };
   const handleFamilyNameInput = ({ target: { value } }) => {
     //listen for new input and assign that to new name

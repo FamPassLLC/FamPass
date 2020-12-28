@@ -51,7 +51,10 @@ function ServicesPage(props) {
   return (
     <div className='d-flex'>
       <div className='col-3 px-0'>
-        <SideBar switchTo='View my families' local_user={props.local_user} />
+        <SideBar
+          switchTo='View my families'
+          local_user={props.local_user.username}
+        />
       </div>
       <div className='col-8 mt-5 pt-5 ml-5'>
         {services}
