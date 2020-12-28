@@ -7,6 +7,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import axios from 'axios';
 
 function FamilyDisplay(props) {
+  console.log('familyDisplay', props);
   //switch states of modal being closed or open
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -30,10 +31,6 @@ function FamilyDisplay(props) {
       setValidated(true);
     }
   };
-  // const handleInput = ({ target: { value } }) => {
-  //   //listen for new input and assign that to new name
-  //   setNewMember(value);
-  // };
 
   //handle delete family
   const handleDelete = (props) => {
@@ -89,7 +86,7 @@ function FamilyDisplay(props) {
       </div>
 
       <FamilyMembers
-        local_user={props.local_user.username}
+        local_user={props.local_user}
         family_name={props.family_name}
         handleShow={handleShow}
         show={show}

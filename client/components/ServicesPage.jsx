@@ -46,7 +46,7 @@ function ServicesPage(props) {
           });
       })
       .catch((err) => console.log(err));
-  }, [services]);
+  }, []);
 
   return (
     <div className='d-flex'>

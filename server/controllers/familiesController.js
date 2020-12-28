@@ -153,8 +153,8 @@ familiesController.addMember = (req, res, next) => {
 };
 // removes a user from a family - pass local_user and family_name
 familiesController.removeMember = (req, res, next) => {
-  // get data from body and put into variables - body will include family name and local username of user to remove
-  const { family_name, local_user } = req.body;
+  // get data from params and put into variables - body will include family name and local username of user to remove
+  const { family_name, local_user } = req.params;
   // first queries - get family_id and user_id corresponding to input data
   // get _id from families table
   const firstQuery1 = `SELECT _id FROM families WHERE (family_name = $1)`;
@@ -173,6 +173,7 @@ familiesController.removeMember = (req, res, next) => {
         const memberInfo = [family_id, local_user_id];
         db.query(finalQuery, memberInfo).then(() => {
           res.locals.status = 'family member removed';
+          res.locals.data = req.params;
           return next();
         });
       });

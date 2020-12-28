@@ -3,21 +3,40 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import axios from 'axios';
 function FamilyMembers(props) {
+  //state to keep track of the new member to be added
   const [newMember, setNewMember] = useState('');
-  const handleInput = ({ target: { value } }) => {
+  //state to keep track of the current family password
+  const [family_password, setFamilyPassword] = useState('');
+
+  const handleFamilyNameInput = ({ target: { value } }) => {
     //listen for new input and assign that to new name
     setNewMember(value);
   };
-  useEffect(() => {
+  const handleFamilyPasswordInput = ({ target: { value } }) => {
+    //listen for new input and assign that to new password
+    setFamilyPassword(value);
+  };
+
+  const handleAddMember = (e) => {
+    e.preventDefault();
     const family_name = props.family_name;
     axios
-      .post('/api/families/add-family-member/', {
+      .post('/api/families/add-family-member', {
         family_name,
         local_user: newMember,
+        family_password,
       })
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
-  }, []);
+  };
+  const handleRemoveMember = (e) => {
+    e.preventDefault();
+    const family_name = props.family_name;
+    axios
+      .delete(`/api/families/remove-family-member/${family_name}/${newMember}`)
+      .then((result) => {})
+      .catch((err) => console.log(err));
+  };
   return (
     <div
       id='members'
@@ -89,7 +108,7 @@ function FamilyMembers(props) {
               <Form
                 noValidate
                 validated={props.validated}
-                onSubmit={props.handleSubmit}
+                onSubmit={handleAddMember}
               >
                 <Form.Group>
                   <Form.Label>New Member</Form.Label>
@@ -98,7 +117,17 @@ function FamilyMembers(props) {
                     type='text'
                     placeholder='Enter your new family member..'
                     value={newMember}
-                    onChange={handleInput}
+                    onChange={handleFamilyNameInput}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Family Password</Form.Label>
+                  <Form.Control
+                    required
+                    type='password'
+                    placeholder='Enter your family password...'
+                    value={family_password}
+                    onChange={handleFamilyPasswordInput}
                   ></Form.Control>
                 </Form.Group>
                 <Button
@@ -118,7 +147,59 @@ function FamilyMembers(props) {
             </Modal.Footer>
           </Modal>
 
-          <button className='btn btn-secondary btn-sm mt-4'>-</button>
+          <Button
+            variant='btn btn-secondary btn-sm mt-4'
+            onClick={props.handleShow}
+          >
+            -
+          </Button>
+          <Modal show={props.show} onHide={props.handleClose}>
+            <Modal.Header>
+              <Modal.Title>Remove a family member</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
+              <Form
+                noValidate
+                validated={props.validated}
+                onSubmit={handleRemoveMember}
+              >
+                <Form.Group>
+                  <Form.Label>Remove A Member</Form.Label>
+                  <Form.Control
+                    required
+                    type='text'
+                    placeholder='Enter family member you want to remove..'
+                    value={newMember}
+                    onChange={handleFamilyNameInput}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Family Password</Form.Label>
+                  <Form.Control
+                    required
+                    type='password'
+                    placeholder='Enter your family password...'
+                    value={family_password}
+                    onChange={handleFamilyPasswordInput}
+                  ></Form.Control>
+                </Form.Group>
+                <Button
+                  variant='primary'
+                  type='submit'
+                  onClick={props.handleClose}
+                >
+                  Update
+                </Button>
+              </Form>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button variant='secondary' onClick={props.handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
     </div>
