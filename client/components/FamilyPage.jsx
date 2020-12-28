@@ -35,7 +35,7 @@ function FamilyPage(props) {
       .catch((err) => console.log(err));
   }, []);
   //submit new name to database
-  const handleSubmit = (e) => {
+  const handleAddFamily = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
     //if the form is not filled out, not allow to submit
@@ -62,6 +62,18 @@ function FamilyPage(props) {
         .then((result) => console.log(result))
         .catch((err) => console.log(err));
     }, 2000);
+  };
+
+  const handleJoinFamily = (e) => {
+    e.preventDefault();
+    axios
+      .post('/api/families/add-family-member', {
+        family_name,
+        family_password,
+        local_user,
+      })
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   };
   const handleFamilyNameInput = ({ target: { value } }) => {
     //listen for new input and assign that to new name
@@ -93,7 +105,56 @@ function FamilyPage(props) {
         })}
 
         <div className='d-flex justify-content-end'>
-          <Button variant='btn btn-outline-primary mr-2'>Join family</Button>
+          {/************* handle join family ****************/}
+          <Button variant='btn btn-outline-primary mr-2' onClick={handleShow}>
+            Join family
+          </Button>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header>
+              <Modal.Title>Join A Family</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
+              <Form
+                noValidate
+                validated={validated}
+                onSubmit={handleJoinFamily}
+              >
+                <Form.Group>
+                  <Form.Label>Family Name</Form.Label>
+                  <Form.Control
+                    required
+                    type='text'
+                    placeholder='Enter a family name to join...'
+                    value={family_name}
+                    onChange={handleFamilyNameInput}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Family Password</Form.Label>
+                  <Form.Control
+                    required
+                    type='password'
+                    placeholder='Enter a family password to join...'
+                    value={family_password}
+                    onChange={handleFamilyPasswordInput}
+                  ></Form.Control>
+                </Form.Group>
+                <Button variant='primary' type='submit' onClick={handleClose}>
+                  Join family
+                </Button>
+              </Form>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button variant='secondary' onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          {/************* handle add family ****************/}
+
           <Button variant='btn btn-primary' onClick={handleShow}>
             + Add Family
           </Button>
@@ -104,7 +165,7 @@ function FamilyPage(props) {
             </Modal.Header>
 
             <Modal.Body>
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Form noValidate validated={validated} onSubmit={handleAddFamily}>
                 <Form.Group>
                   <Form.Label>Family Name</Form.Label>
                   <Form.Control
