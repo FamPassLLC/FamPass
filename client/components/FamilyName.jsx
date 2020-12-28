@@ -26,7 +26,7 @@ function FamilyName(props) {
       //confirm form input is filled out
       setValidated(true);
     }
-    //PUT requet to update family name
+    //PUT request to update family name
     axios
       .put('/api/families/renamefamily', { family_name, newName })
       .then((result) => {
@@ -39,12 +39,12 @@ function FamilyName(props) {
     setNewname(value);
   };
   return (
-    <div className='d-flex'>
-      <p className='mr-3'>
+    <div className='d-flex align-items-center'>
+      <p className='mr-3 mt-3'>
         <strong>{family_name}</strong>
       </p>
 
-      <Button variant='info' onClick={handleShow}>
+      <Button onClick={handleShow} variant='btn btn-outline-primary'>
         Edit
       </Button>
 

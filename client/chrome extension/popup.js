@@ -1,7 +1,16 @@
-document.addEventListener('DOMContentLoaded', function () {
-  let button = document.getElementById('button');
-  button.addEventListener('click', verifyUser);
-});
+document.addEventListener('DOMContentLoaded', () => {
+    let button = document.getElementById('button');
+    button.addEventListener('click', verifyUser);
+    chrome.runtime.sendMessage( {type: 'loginStatus'} , (response) => {
+      if (response.loggedIn) {
+        const usernameField = document.getElementById('inputUsername')
+        const passwordField = document.getElementById('inputPassword')
+        usernameField.style.visibility = "hidden";
+        passwordField.style.visibility = "hidden";
+      }
+    })
+
+})
 
 //verify if username and password exist in database
 // if yes, save username and password in an obj in background.js

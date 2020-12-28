@@ -5,6 +5,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import FamilyDisplay from './FamilyDisplay';
 import SideBar from './SideBar';
 import axios from 'axios';
+
 function FamilyPage(props) {
   //switch states of modal being closed or open
   const handleClose = () => setShow(false);
@@ -18,17 +19,31 @@ function FamilyPage(props) {
   const [families, setFamilies] = useState([]);
   //state to keep track of the current family name (retrieved from database for display)
   const [family_name, setFamilyName] = useState('');
+  //state to keep track of the current family password
+  const [family_password, setFamilyPassword] = useState('');
+
+  // useEffect(() => {
+  //   //retrieve current family name from db to display
+  //   axios
+  //     .get('api/families/allfamilies')
+  //     .then((result) => {
+  //       console.log(result.data);
+  //       setFamilies(result.data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   useEffect(() => {
     //retrieve current family name from db to display
     axios
-      .get('api/families/')
+      .get('api/families/allfamilies')
       .then((result) => {
-        setFamilies(result.data);
+        const userFams = result.data
+          .filter((el) => el.username === props.local_user.username)
+        setFamilies(userFams);
       })
       .catch((err) => console.log(err));
-  }, [families]);
-
+  }, []);
   //submit new name to database
   const handleSubmit = (e) => {
     const form = e.currentTarget;
@@ -38,28 +53,35 @@ function FamilyPage(props) {
       //confirm form input is filled out
       setValidated(true);
     }
+    //POST request to add a family
 
     //POST request to add an user to the family just created and create a family in the database
-    const local_user = props.local_user.username;
+    const local_user = props.local_user;
 
     axios
-      .all([
-        axios.post('/api/families/addfamily/', { family_name }),
-        axios.post('/api/families/add-family-member/', {
-          family_name,
-          local_user,
-        }),
-      ])
-      .then(
-        axios.spread((...responses) =>
-          console.log('responses from axios post requests', responses)
-        )
-      )
+      .post('/api/families/addfamily', { family_name, family_password })
+      .then((result) => console.log(result))
       .catch((err) => console.log(err));
+    setTimeout(() => {
+      const local_user = props.local_user.username;
+      console.log(family_name, family_password, local_user);
+      axios
+        .post('/api/families/add-family-member', {
+          family_name,
+          family_password,
+          local_user,
+        })
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err));
+    }, 2000);
   };
-  const handleInput = ({ target: { value } }) => {
+  const handleFamilyNameInput = ({ target: { value } }) => {
     //listen for new input and assign that to new name
     setFamilyName(value);
+  };
+  const handleFamilyPasswordInput = ({ target: { value } }) => {
+    //listen for new input and assign that to new password
+    setFamilyPassword(value);
   };
   return (
     <div className='d-flex'>
@@ -102,7 +124,17 @@ function FamilyPage(props) {
                     type='text'
                     placeholder='Enter your family name...'
                     value={family_name}
-                    onChange={handleInput}
+                    onChange={handleFamilyNameInput}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Family Password</Form.Label>
+                  <Form.Control
+                    required
+                    type='password'
+                    placeholder='Enter your family password...'
+                    value={family_password}
+                    onChange={handleFamilyPasswordInput}
                   ></Form.Control>
                 </Form.Group>
                 <Button variant='primary' type='submit' onClick={handleClose}>

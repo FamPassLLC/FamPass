@@ -12,7 +12,7 @@ router.get(
   '/get-login-info',
   servicesController.getServicesLogin,
   (req, res) => {
-    res.status(200).send(res.locals.loginInfo);
+    return res.status(200).send(res.locals.loginInfo);
   }
 );
 
@@ -42,5 +42,10 @@ router.delete(
 );
 
 // TO ADD: (1) REQUEST TO GET LOGIN INFO
+router.post('/loginInfoExt', servicesController.getLoginExt, (req, res) => {
+  const userInfo = res.locals.userInfo;
+  console.log(userInfo)
+  return res.json(userInfo)
+})
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const db = require('../models/dbModels');
 const { Base64 } = require('js-base64');
+const { HotModuleReplacementPlugin } = require('webpack');
 
 const servicesController = {};
 
@@ -41,10 +42,10 @@ servicesController.addServicesLogin = (req, res, next) => {
 };
 
 // will return table with family names and available services
-// gets arr of objs w/ format: family_name, local_user, service, service_username, service_password
+// gets arr of objs w/ format: family_name, local_user, service
 // on frontend, filter by family_name
 servicesController.getServicesLogin = (req, res, next) => {
-  const queryString = `SELECT f.family_name, sl.local_user, sl.service, sl.service_username, sl.service_password
+  const queryString = `SELECT f.family_name, sl.local_user, sl.service
   FROM family_logins fl
   JOIN families f ON f._id = fl.family_id
   JOIN service_login sl ON sl._id = fl.service_login_id`;
@@ -95,5 +96,13 @@ servicesController.deleteServicesLogin = (req, res, next) => {
     })
     .catch((err) => next({ err }));
 };
+
+servicesController.getLoginExt = (req, res, next) => {
+  // const username = req.body.user
+  // const password = req.body.password
+  res.locals.userInfo = {username: 'blah', password: 'blah'};
+  return next();
+  //query
+}
 
 module.exports = servicesController;

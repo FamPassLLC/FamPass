@@ -20,10 +20,11 @@ function LoginPage(props) {
   const sendDetailsToServer = (e) => {
     e.preventDefault();
     if (state.username.length && state.password.length) {
-      const payload = {
-        username: state.username,
-        password: state.password,
+      const payload ={
+        "username": state.username,
+        "password": state.password,
       };
+
       fetch('http://localhost:8080/api/users/signin', {
         method: 'POST',
         headers: {
@@ -52,27 +53,33 @@ function LoginPage(props) {
     history.push('/signup');
   };
   return (
-    <div id='loginPage'>
-      <h1>Login page</h1>
+    <div className='loginPage text-center'>
+      {/* <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img> */}
+      <br></br>
+      <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
       <div>
-        <form>
+        <form className="form-signin">
+        <label htmlFor="username" className="sr-only">Email address</label>
           <input
             type='text'
             placeholder='Username'
+            className="form-control"
             id='username'
             value={state.username}
             onChange={handleChange}
-          ></input>
+            required autoFocus>
+            </input>
+          <label htmlFor="password" className="sr-only">Password</label>
           <input
             type='password'
             placeholder='Password'
             id='password'
             value={state.password}
             onChange={handleChange}
-          ></input>
-          <button type='submit' onClick={sendDetailsToServer}>
-            Login
-          </button>
+            className="form-control" required>
+            </input>
+          <button className="btn btn-lg btn-primary btn-block" type="button" onClick={sendDetailsToServer}>Sign in</button>
+          <a href="/signup">Sign Up</a>
         </form>
       </div>
     </div>
