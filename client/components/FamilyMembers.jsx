@@ -111,7 +111,7 @@ function FamilyMembers(props) {
                 onSubmit={handleAddMember}
               >
                 <Form.Group>
-                  <Form.Label>New Member</Form.Label>
+                  <Form.Label>New member</Form.Label>
                   <Form.Control
                     required
                     type='text'
@@ -121,7 +121,7 @@ function FamilyMembers(props) {
                   ></Form.Control>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label>Family Password</Form.Label>
+                  <Form.Label>Family password</Form.Label>
                   <Form.Control
                     required
                     type='password'
@@ -165,7 +165,7 @@ function FamilyMembers(props) {
                 onSubmit={handleRemoveMember}
               >
                 <Form.Group>
-                  <Form.Label>Remove A Member</Form.Label>
+                  <Form.Label>Remove a member</Form.Label>
                   <Form.Control
                     required
                     type='text'
@@ -175,7 +175,7 @@ function FamilyMembers(props) {
                   ></Form.Control>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label>Family Password</Form.Label>
+                  <Form.Label>Family password</Form.Label>
                   <Form.Control
                     required
                     type='password'

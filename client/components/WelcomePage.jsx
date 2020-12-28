@@ -24,9 +24,9 @@ function WelcomePage(props) {
           />
         </svg>
         <p className='mb-0 mr-5 ml-2'>
-          Welcome,
+          Welcome, 
           <span>
-            <strong>{ props.local_user.username}.</strong>
+            <strong>{" " + props.local_user.username}.</strong>
           </span>
         </p>
       </div>
