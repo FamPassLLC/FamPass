@@ -42,10 +42,10 @@ router.delete(
 );
 
 // TO ADD: (1) REQUEST TO GET LOGIN INFO
-router.post('/loginInfoExt', servicesController.getLoginExt, (req, res) => {
-  const userInfo = res.locals.userInfo;
-  console.log(userInfo)
-  return res.json(userInfo)
-})
+// router.post('/loginInfoExt', servicesController.getLoginExt, (req, res) => {
+//   const userInfo = res.locals.userInfo;
+//   console.log(userInfo)
+//   return res.json(userInfo)
+// })
 
 module.exports = router;

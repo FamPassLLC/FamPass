@@ -1,20 +1,31 @@
 const db = require('../models/dbModels');
 const { Base64 } = require('js-base64');
-const { HotModuleReplacementPlugin } = require('webpack');
-
 const servicesController = {};
-
 // adds login information to service login info database
 servicesController.addServicesLogin = (req, res, next) => {
   // take content of req.body and assign to variables to pass to DB query
   let { local_user, service, service_username, service_password } = req.body;
+  // determine service being added and get corresponding login link and logo
+  let login_link;
+  let service_logo;
+  if (service === 'Netflix') {
+    login_link = 'https://www.netflix.com/login';
+    service_logo =
+      'https://cdn.vox-cdn.com/thumbor/AwKSiDyDnwy_qoVdLPyoRPUPo00=/39x0:3111x2048/1400x1400/filters:focal(39x0:3111x2048):format(png)/cdn.vox-cdn.com/uploads/chorus_image/image/49901753/netflixlogo.0.0.png';
+  }
   // encode password to base64
   service_password = Base64.encode(service_password); // use atob() to decode in chrome extension
   // values to pass into database query
-  const params = [local_user, service, service_username, service_password];
+  const params = [
+    local_user,
+    service,
+    service_username,
+    service_password,
+    login_link,
+    service_logo,
+  ];
   // values for first query - to determine whether login info already exists
   const verifyParams = [local_user, service];
-
   // first query: whether login information is already in DB
   db.query(
     `SELECT * FROM service_login WHERE (local_user = $1 AND service = $2);`,
@@ -27,29 +38,26 @@ servicesController.addServicesLogin = (req, res, next) => {
         return next();
       } else {
         // second query: add login infor to DB
-        const queryString = `INSERT INTO service_login (local_user, service, service_username, service_password) VALUES ($1, $2, $3, $4)`;
+        const queryString = `INSERT INTO service_login (local_user, service, service_username, service_password, login_link, service_logo) 
+          VALUES ($1, $2, $3, $4, $5, $6)`;
         db.query(queryString, params)
           .then((data) => {
             res.locals.status = 'inserted';
             return next();
           })
-          .catch((err) => {
-            return next({ err });
-          });
+          .catch((err) => next({ err }));
       }
     })
     .catch((err) => next({ err }));
 };
-
 // will return table with family names and available services
-// gets arr of objs w/ format: family_name, local_user, service
+// gets arr of objs w/ format: family_name, local_user, service, login_link, service_logo
 // on frontend, filter by family_name
 servicesController.getServicesLogin = (req, res, next) => {
-  const queryString = `SELECT f.family_name, sl.local_user, sl.service
+  const queryString = `SELECT f.family_name, sl.local_user, sl.service, sl.login_link, sl.service_logo
   FROM family_logins fl
   JOIN families f ON f._id = fl.family_id
   JOIN service_login sl ON sl._id = fl.service_login_id`;
-
   db.query(queryString)
     .then((data) => {
       res.locals.loginInfo = data.rows; // note that service_password is encoded
@@ -57,7 +65,6 @@ servicesController.getServicesLogin = (req, res, next) => {
     })
     .catch((err) => next({ err }));
 };
-
 // allows user to update saved password for third-party service
 servicesController.updateServicesLogin = (req, res, next) => {
   let {
@@ -81,7 +88,6 @@ servicesController.updateServicesLogin = (req, res, next) => {
     })
     .catch((err) => next({ err }));
 };
-
 // allows users to delete previously saved login information
 servicesController.deleteServicesLogin = (req, res, next) => {
   // will take local user and service
@@ -96,13 +102,4 @@ servicesController.deleteServicesLogin = (req, res, next) => {
     })
     .catch((err) => next({ err }));
 };
-
-servicesController.getLoginExt = (req, res, next) => {
-  // const username = req.body.user
-  // const password = req.body.password
-  res.locals.userInfo = {username: 'blah', password: 'blah'};
-  return next();
-  //query
-}
-
 module.exports = servicesController;

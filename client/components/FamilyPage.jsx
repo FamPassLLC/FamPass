@@ -22,17 +22,6 @@ function FamilyPage(props) {
   //state to keep track of the current family password
   const [family_password, setFamilyPassword] = useState('');
 
-  // useEffect(() => {
-  //   //retrieve current family name from db to display
-  //   axios
-  //     .get('api/families/allfamilies')
-  //     .then((result) => {
-  //       console.log(result.data);
-  //       setFamilies(result.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
   useEffect(() => {
     //retrieve current family name from db to display
     axios
@@ -64,7 +53,6 @@ function FamilyPage(props) {
       .catch((err) => console.log(err));
     setTimeout(() => {
       const local_user = props.local_user.username;
-      console.log(family_name, family_password, local_user);
       axios
         .post('/api/families/add-family-member', {
           family_name,
@@ -99,7 +87,7 @@ function FamilyPage(props) {
               families={families}
               family_name={data.family_name}
               key={i}
-              local_user={props.local_user}
+              local_user={props.local_user.username}
             />
           );
         })}
