@@ -7,7 +7,8 @@ function FamilyMembers(props) {
   const [newMember, setNewMember] = useState('');
   //state to keep track of the current family password
   const [family_password, setFamilyPassword] = useState('');
-
+  //state to keep track of members in a family
+  const [family_members, setFamilyMembers] = useState([]);
   const handleFamilyNameInput = ({ target: { value } }) => {
     //listen for new input and assign that to new name
     setNewMember(value);
@@ -37,6 +38,17 @@ function FamilyMembers(props) {
       .then((result) => {})
       .catch((err) => console.log(err));
   };
+  useEffect(() => {
+    axios
+      .get('/api/families/allfamilies')
+      .then((result) => {
+        const members = result.data.filter(
+          (fam) => fam.family_name === props.family_name
+        );
+        setFamilyMembers(members);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div
       id='members'
@@ -89,6 +101,11 @@ function FamilyMembers(props) {
       {/* display all users in the fam here */}
       <div>
         <p className='text-center mt-3'>Members</p>
+        <p>
+          {family_members.map((el, i) => (
+            <span key={i}>{el.username} * </span>
+          ))}
+        </p>
       </div>
       {/*****************************************/}
       <div className='d-flex justify-content-end'>

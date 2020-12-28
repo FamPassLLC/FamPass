@@ -66,15 +66,15 @@ router.delete(
 
 // share service with family
 router.post('/share-service', familiesController.shareService, (req, res) => {
-  res.send('service shared');
+  res.status(200).send('service shared');
 });
 
 // stop sharing service with family
 router.delete(
-  '/stop-sharing-service',
+  '/stop-sharing-service/:family_name/:service/:local_user',
   familiesController.stopSharingService,
   (req, res) => {
-    res.send('sharing stopped');
+    res.status(200).send('sharing stopped');
   }
 );
 
