@@ -70,12 +70,12 @@ function ServicesDisplay(props) {
         </button>
         <div className='mt-2 mb-4 mx-4 align-items-start'>
           <a href='#' className='badge badge-secondary'>Family:{props.family_name}</a>
-          <button className='btn btn-secondary btn-sm 
+          {/* <button className='btn btn-secondary btn-sm 
           d-flex justify-content-start mt-1'
-          // onClick={() => handleDelete(props)}
+          onClick={() => handleDelete(props)}
           >
             - Remove Service
-          </button>
+          </button> */}
         </div>
 
       </div>

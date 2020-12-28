@@ -59,9 +59,10 @@ function ServicesPage(props) {
       <div className='col-8 mt-5 pt-5 ml-5'>
         {services}
 
-        <div className='d-flex justify-content-end align-items-end'>
+        {/* <div className='d-flex justify-content-end align-items-end'>
           <button className='btn btn-primary'>+ Add Service</button>
-        </div>
+
+        </div> */}
       </div>
     </div>
   );

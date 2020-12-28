@@ -22,31 +22,28 @@ function FamilyPage(props) {
   //state to keep track of the current family password
   const [family_password, setFamilyPassword] = useState('');
 
-  useEffect(() => {
-    //retrieve current family name from db to display
-    axios
-      .get('api/families/allfamilies')
-      .then((result) => {
-        console.log(result.data);
-        setFamilies(result.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
   // useEffect(() => {
   //   //retrieve current family name from db to display
   //   axios
   //     .get('api/families/allfamilies')
   //     .then((result) => {
-  //       const userFams = result.data
-  //         .filter((el) => el.username === props.local_user.username)
-  //         .map((el) => el.family_name);
-  //       console.log(userFams);
-  //       setFamilies(userFams);
-  //       setFamilyName(userFams);
+  //       console.log(result.data);
+  //       setFamilies(result.data);
   //     })
   //     .catch((err) => console.log(err));
   // }, []);
+
+  useEffect(() => {
+    //retrieve current family name from db to display
+    axios
+      .get('api/families/allfamilies')
+      .then((result) => {
+        const userFams = result.data
+          .filter((el) => el.username === props.local_user.username)
+        setFamilies(userFams);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   //submit new name to database
   const handleSubmit = (e) => {
     const form = e.currentTarget;
