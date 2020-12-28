@@ -38,8 +38,9 @@ function FamilyPage(props) {
     axios
       .get('api/families/allfamilies')
       .then((result) => {
-        const userFams = result.data
-          .filter((el) => el.username === props.local_user.username)
+        const userFams = result.data.filter(
+          (el) => el.username === props.local_user.username
+        );
         setFamilies(userFams);
       })
       .catch((err) => console.log(err));
@@ -53,7 +54,6 @@ function FamilyPage(props) {
       //confirm form input is filled out
       setValidated(true);
     }
-    //POST request to add a family
 
     //POST request to add an user to the family just created and create a family in the database
     const local_user = props.local_user;
