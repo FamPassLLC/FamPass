@@ -13,7 +13,7 @@ const router = express.Router();
 
 // request to retrieve families (for display on landing page)
 // also use this method to get members to display within families
-router.get('/', familiesController.getFamilies, (req, res) => {
+router.get('/allfamilies', familiesController.getFamilies, (req, res) => {
   const families = res.locals.familyDetails;
   res.status(200).json(families); // arr of objs { family_name, username }
 });

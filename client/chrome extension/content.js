@@ -18,7 +18,7 @@ if (serviceLinks[link]) {
       if (link.indexOf('netflix') !== -1){
         console.log(response)
         document.getElementById('id_userLoginId').value = response.username;
-        document.getElementById('id_password').value = response.password;
+        document.getElementById('id_password').value = window.atob(response.password);
         document.getElementsByClassName('login-form')[1].submit();
       }
     }

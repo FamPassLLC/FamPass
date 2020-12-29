@@ -18,6 +18,12 @@ h1 {
   border: solid 0 1px 0 0 darkgrey;
 }
 
+#logo {
+  font-family: 'Permanent Marker', cursive;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
 #loginPage {
   padding-top: 40px;
   padding-bottom: 40px;

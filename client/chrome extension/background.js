@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({username, password})
+        body: JSON.stringify({username, password, service: request.service})
       })
       .then((data) => {
         data.json()

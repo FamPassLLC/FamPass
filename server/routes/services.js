@@ -12,7 +12,7 @@ router.get(
   '/get-login-info',
   servicesController.getServicesLogin,
   (req, res) => {
-    res.status(200).send(res.locals.loginInfo);
+    return res.status(200).send(res.locals.loginInfo);
   }
 );
 

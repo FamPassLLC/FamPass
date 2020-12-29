@@ -42,10 +42,10 @@ servicesController.addServicesLogin = (req, res, next) => {
 };
 
 // will return table with family names and available services
-// gets arr of objs w/ format: family_name, local_user, service, service_username, service_password
+// gets arr of objs w/ format: family_name, local_user, service
 // on frontend, filter by family_name
 servicesController.getServicesLogin = (req, res, next) => {
-  const queryString = `SELECT f.family_name, sl.local_user, sl.service, sl.service_username, sl.service_password
+  const queryString = `SELECT f.family_name, sl.local_user, sl.service
   FROM family_logins fl
   JOIN families f ON f._id = fl.family_id
   JOIN service_login sl ON sl._id = fl.service_login_id`;
@@ -98,11 +98,46 @@ servicesController.deleteServicesLogin = (req, res, next) => {
 };
 
 servicesController.getLoginExt = (req, res, next) => {
-  // const username = req.body.user
-  // const password = req.body.password
-  res.locals.userInfo = {username: 'blah', password: 'blah'};
-  return next();
-  //query
-}
+  const families = [];
+  const services = [];
+  const username = req.body.username 
+  const param = [username]
+  const urlToServiceName = {
+    'https://www.netflix.com/login': 'Netflix',
+  };
+  const currentService = urlToServiceName[req.body.service]
+  const queryString = `SELECT f.family_name
+  FROM family_members fm
+  JOIN families f ON f._id = fm.family_id
+  JOIN local_users lu ON lu._id = fm.local_user_id where lu.username = $1`
+
+db.query(queryString, param)
+.then((data) => {
+  for (let i = 0; i < data.rows.length; i += 1) {
+  families[i] = data.rows[i].family_name
+  }
+  console.log(families)
+})
+.then(() => {
+  const queryString2 = `SELECT f.family_name, sl.service, service_username, service_password
+  FROM family_logins fl
+  JOIN families f ON f._id = fl.family_id
+  JOIN service_login sl ON sl._id = fl.service_login_id`;
+  db.query(queryString2)
+    .then((data2) => {
+      for (let i = 0; i < data2.rows.length; i += 1){
+        if (families.includes(data2.rows[i].family_name) && data2.rows[i].service === currentService) {
+          services.push(data2.rows[i])
+        }
+      }
+      if (services.length > 0) {
+        res.locals.userInfo = {username: services[0].service_username, password: services[0].service_password}
+      }
+      return next();
+    })
+  }
+)
+.catch((err) => next({ err }));
+};
 
 module.exports = servicesController;

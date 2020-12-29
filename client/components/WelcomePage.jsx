@@ -4,9 +4,10 @@ import { render } from 'react-dom';
 import WelcomeDisplay from './WelcomeDisplay';
 
 function WelcomePage(props) {
+  
   return (
     <div>
-      <WelcomeDisplay local_user={props.local_user} />
+      <WelcomeDisplay local_user={props.local_user.username} />
 
       <div className='d-flex justify-content-end mt-10'>
         <svg
@@ -25,12 +26,11 @@ function WelcomePage(props) {
         <p className='mb-0 mr-5 ml-2'>
           Welcome,
           <span>
-            <strong>{props.local_user.username}</strong>
+            <strong>{ props.local_user.username}.</strong>
           </span>
         </p>
       </div>
     </div>
-  );
-}
-
+    );
+  }
 export default WelcomePage;

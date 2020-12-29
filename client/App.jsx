@@ -10,7 +10,7 @@ import SignUpPage from './components/Signup';
 
 function App() {
   const [local_user, setLocalUser] = useState('');
-  
+  const [extFamily, setExtFamily] = useState([]);
 
   return (
     <Switch>
@@ -32,7 +32,11 @@ function App() {
           </Route>
 
           <Route exact path='/services'>
-            <ServicesPage />
+            <ServicesPage
+              local_user={local_user}
+              extFamily={extFamily}
+              setExtFamily={setExtFamily}
+            />
           </Route>
         </div>
       </Router>

@@ -54,32 +54,32 @@ function SignUpPage(props) {
     history.push('/home')
   }
     return (
-      <div class='loginPage' class="text-center">
+      <div className='loginPage text-center'>
         <br></br>
         <div>
-        <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+        <h1 className='h3 mb-3 font-weight-normal'>Create Account</h1>
           <div id="nameAvailabiltiy" style={{visibility: state.visible, color: "red"}}>Username already in use </div>
-          <form class="form-signin">
-            <label for="username" class="sr-only">Email address</label>
+          <form className='form-signin'>
+            <label htmlFor='username' className='sr-only'>Email address</label>
             <input
               type='text'
               placeholder='Username'
-              class="form-control"
+              className="form-control"
               id='username'
               value={state.username}
               onChange={handleChange}
-              required autofocus>
+              required autoFocus>
               </input>
-            <label for="password" class="sr-only">Password</label>
+            <label htmlFor="password" className="sr-only">Password</label>
             <input
               type='password'
               placeholder='Password'
               id='password'
               value={state.password}
               onChange={handleChange}
-              class="form-control" required>
+              className="form-control" required>
             </input>
-            <button class="btn btn-lg btn-primary btn-block" type="button" onClick={sendDetailsToServer}>Sign Up</button>
+            <button className="btn btn-lg btn-primary btn-block" type="button" onClick={sendDetailsToServer}>Sign Up</button>
         </form>
         </div>
       </div>
