@@ -2,7 +2,8 @@ import React, { Component, useState, useEffect } from 'react';
 import { Switch, Route, Link, Redirect, useHistory } from 'react-router-dom';
 import { render } from 'react-dom';
 import axios from 'axios';
-
+import servicesImg from '../componentStyles/services.jpg';
+import familyImg from '../componentStyles/family.jpg';
 function WelcomeDisplay(props) {
   //display logged in username
   const local_user = props.local_user;
@@ -19,46 +20,40 @@ function WelcomeDisplay(props) {
   };
 
   return (
-    <div
-      id='welcomeButtons'
-      className='d-flex justify-content-center'
-      style={{ margin: '10vw', border: '0 1px 0 0' }}
-    >
+    <div id='welcomeButtons' className='d-flex justify-content-center mt-5'>
       <div className='flex-column align-item-center mx-5' id='viewMyFamilies'>
-        <h5 className='text-center mb-4' style={{ color: 'grey' }}>
-          View my families
-        </h5>
-        <button
+        <h5 className='text-center mb-4'>View my families</h5>
+        <img
+          id='servicesImg'
           onClick={redirectToFamily}
-          className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-auto justify-content-around'
           style={{
             width: '15vw',
             height: '15vw',
             borderRadius: '15px',
-            border: 'solid 1px lightgrey',
+            cursor: 'pointer',
+            boxShadow: '5px 5px 7px rgb(108, 108, 108)',
           }}
-        >
-          
-          Image 1
-        </button>
+          src={familyImg}
+        />
       </div>
 
-      <div className='mx-5' id='viewSharedServices'>
-        <h5 className='text-center mb-4' style={{ color: 'grey' }}>
-          View shared with me
-        </h5>
-        <button
-          onClick={redirectToServices}
-          className='btn btn-raised shadow my-button w-xs bg-white d-flex mt-2 mx-auto justify-content-around'
+      <div
+        className='mx-5 d-flex flex-column align-items-center'
+        id='viewSharedServices'
+      >
+        <h5 className='text-center mb-4'>View shared services</h5>
+        <img
+          id='servicesImg'
+          onClick={redirectToFamily}
           style={{
             width: '15vw',
             height: '15vw',
             borderRadius: '15px',
-            border: 'solid 1px lightgrey',
+            cursor: 'pointer',
+            boxShadow: '5px 5px 7px rgb(108, 108, 108)',
           }}
-        >
-          Image 2
-        </button>
+          src={servicesImg}
+        />
       </div>
     </div>
   );
