@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import axios from 'axios';
 import servicesImg from '../componentStyles/services.jpg';
 import familyImg from '../componentStyles/family.jpg';
+
 function WelcomeDisplay(props) {
   //display logged in username
   const local_user = props.local_user;
@@ -44,7 +45,7 @@ function WelcomeDisplay(props) {
         <h5 className='text-center mb-4'>View shared services</h5>
         <img
           id='servicesImg'
-          onClick={redirectToFamily}
+          onClick={redirectToServices}
           style={{
             width: '15vw',
             height: '15vw',

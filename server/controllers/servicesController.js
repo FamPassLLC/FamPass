@@ -2,6 +2,7 @@ const db = require('../models/dbModels');
 const { Base64 } = require('js-base64');
 const servicesController = {};
 // adds login information to service login info database
+
 servicesController.addServicesLogin = (req, res, next) => {
   // take content of req.body and assign to variables to pass to DB query
   let { local_user, service, service_username, service_password } = req.body;
@@ -11,7 +12,7 @@ servicesController.addServicesLogin = (req, res, next) => {
   if (service === 'Netflix') {
     login_link = 'https://www.netflix.com/login';
     service_logo =
-      'https://cdn.vox-cdn.com/thumbor/AwKSiDyDnwy_qoVdLPyoRPUPo00=/39x0:3111x2048/1400x1400/filters:focal(39x0:3111x2048):format(png)/cdn.vox-cdn.com/uploads/chorus_image/image/49901753/netflixlogo.0.0.png';
+      'https://i.pinimg.com/originals/f6/97/4e/f6974e017d3f6196c4cbe284ee3eaf4e.png';
   }
   // encode password to base64
   service_password = Base64.encode(service_password); // use atob() to decode in chrome extension
@@ -26,6 +27,7 @@ servicesController.addServicesLogin = (req, res, next) => {
   ];
   // values for first query - to determine whether login info already exists
   const verifyParams = [local_user, service];
+
   // first query: whether login information is already in DB
   db.query(
     `SELECT * FROM service_login WHERE (local_user = $1 AND service = $2);`,
@@ -38,6 +40,7 @@ servicesController.addServicesLogin = (req, res, next) => {
         return next();
       } else {
         // second query: add login infor to DB
+
         const queryString = `INSERT INTO service_login (local_user, service, service_username, service_password, login_link, service_logo) 
           VALUES ($1, $2, $3, $4, $5, $6)`;
         db.query(queryString, params)
@@ -50,6 +53,7 @@ servicesController.addServicesLogin = (req, res, next) => {
     })
     .catch((err) => next({ err }));
 };
+
 // will return table with family names and available services
 // gets arr of objs w/ format: family_name, local_user, service, login_link, service_logo
 // on frontend, filter by family_name

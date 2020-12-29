@@ -21,12 +21,19 @@ h1 {
   border: solid 0 1px 0 0 darkgrey;
 }
 
+#loginbackground {
+  background-color: rgb(202, 240, 248);
+  height: 100%;
+  padding-top: 25vh;
+}
+
 #logo {
   font-family: 'Permanent Marker', cursive;
   color: white;
   display: flex;
   justify-content: center;
 }
+
 #loginPage {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -56,4 +63,9 @@ h1 {
   background-size: cover;
   height: 100%;
   opacity: 0.9;
+}
+
+h5 {
+  font-family: 'Roboto', sans-serif;
+  opacity: 1;
 }
