@@ -33,7 +33,7 @@ router.put(
 );
 
 router.delete(
-  '/delete-service-password',
+  '/delete-service-password/',
   servicesController.deleteServicesLogin,
   (req, res) => {
     console.log(res.locals.status);
@@ -41,7 +41,7 @@ router.delete(
   }
 );
 
-// TO ADD: (1) REQUEST TO GET LOGIN INFO
+//route for extension to request user/password
 router.post('/loginInfoExt', servicesController.getLoginExt, (req, res) => {
   const userInfo = res.locals.userInfo;
   console.log(userInfo)

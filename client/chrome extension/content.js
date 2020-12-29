@@ -16,16 +16,15 @@ if (serviceLinks[link]) {
     if (response.loginStatus === true) {
       //going to have to hard code each response as they are different
       if (link.indexOf('netflix') !== -1){
-        console.log(response)
         document.getElementById('id_userLoginId').value = response.username;
-        document.getElementById('id_password').value = response.password;
+        document.getElementById('id_password').value = window.atob(response.password);
         document.getElementsByClassName('login-form')[1].submit();
       }
     }
   })
 }
 
-//check if we need to kill tab and reopen same tab
+//check if we need to kill tab and reopen same tab to avoid google chrome password save prompt
 if (hidePasswordLinks[link]) {
 chrome.runtime.sendMessage({type: 'hidePassword', link}, (response) => {
 })

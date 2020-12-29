@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switch, Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import { render } from 'react-dom';
 import LoginPage from './components/LoginPage';
@@ -20,7 +20,7 @@ function App() {
             <LoginPage setLocalUser={setLocalUser}></LoginPage>
           </Route>
           <Route exact path='/signup'>
-            <SignUpPage></SignUpPage>
+            <SignUpPage setLocalUser={setLocalUser} />
           </Route>
           {/* after verification, login page routes to /home that renders WelcomePage */}
           <Route exact path='/home'>

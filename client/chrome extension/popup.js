@@ -3,10 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', verifyUser);
     chrome.runtime.sendMessage( {type: 'loginStatus'} , (response) => {
       if (response.loggedIn) {
-        const usernameField = document.getElementById('inputUsername')
-        const passwordField = document.getElementById('inputPassword')
-        usernameField.style.visibility = "hidden";
-        passwordField.style.visibility = "hidden";
+        document.getElementById('login').remove()
       }
     })
 
@@ -16,18 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
 // if yes, save username and password in an obj in background.js
 // if not, inform user to enter valid username and password
 function verifyUser() {
-  const usernameField = document.getElementById('inputUsername');
-  const passwordField = document.getElementById('inputPassword');
+  const usernameField = document.getElementById('inputUsername')
+  const passwordField = document.getElementById('inputPassword')
   const username = usernameField.value;
   const password = passwordField.value;
   chrome.runtime.sendMessage(
     { type: 'login', username, password },
     function (response) {
       if (response.loggedIn === true) {
-        usernameField.style.visibility = 'hidden';
-        passwordField.style.visibility = 'hidden';
+        document.getElementById('login').remove()
+        document.getElementById('logoText').innerHTML = ('Hi ' + username + '!').toUpperCase()
       }
-      //add something for else
+      //add something for invalid password
     }
   );
 }

@@ -52,10 +52,11 @@ router.post('/add-family-member', familiesController.addMember, (req, res) => {
 
 // request to delete users from a family
 router.delete(
-  '/remove-family-member',
+  '/remove-family-member/:family_name/:local_user',
   familiesController.removeMember,
   (req, res) => {
-    res.send('family member removed');
+    const { data } = res.locals;
+    res.status(200).json(data);
   }
 );
 
@@ -65,15 +66,15 @@ router.delete(
 
 // share service with family
 router.post('/share-service', familiesController.shareService, (req, res) => {
-  res.send('service shared');
+  res.status(200).send('service shared');
 });
 
 // stop sharing service with family
 router.delete(
-  '/stop-sharing-service',
+  '/stop-sharing-service/:family_name/:service/:local_user',
   familiesController.stopSharingService,
   (req, res) => {
-    res.send('sharing stopped');
+    res.status(200).send('sharing stopped');
   }
 );
 
