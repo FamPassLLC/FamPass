@@ -6,8 +6,11 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
 h1 {
-  top:50px;
+  top: 50px;
+  font-family: 'Permanent Marker', cursive;
+  color: rgb(0, 119, 182);
 }
 
 #sideBarButton {
@@ -18,12 +21,19 @@ h1 {
   border: solid 0 1px 0 0 darkgrey;
 }
 
+#loginbackground {
+  background-color: rgb(202, 240, 248);
+  height: 100%;
+  padding-top: 25vh;
+}
+
 #logo {
   font-family: 'Permanent Marker', cursive;
   color: white;
   display: flex;
   justify-content: center;
 }
+
 #loginPage {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -47,4 +57,15 @@ h1 {
 }
 .form-signin .form-control:focus {
   z-index: 2;
+}
+#welcome-page {
+  background-image: url('./popcorn.jpg');
+  background-size: cover;
+  height: 100%;
+  opacity: 0.9;
+}
+
+h5 {
+  font-family: 'Roboto', sans-serif;
+  opacity: 1;
 }

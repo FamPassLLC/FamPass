@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.runtime.sendMessage( {type: 'loginStatus'} , (response) => {
       if (response.loggedIn) {
         document.getElementById('login').remove()
-        document.getElementById('logoText').innerHTML = ('Hi ' + username + '!').toUpperCase()
       }
     })
 

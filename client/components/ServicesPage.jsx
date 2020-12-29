@@ -39,6 +39,8 @@ function ServicesPage(props) {
                   family_name={extFamilyService[i].family_name}
                   local_user={extFamilyService[i].local_user} //this local_user(from db) is one who is sharing the service
                   service={extFamilyService[i].service}
+                  service_logo={extFamilyService[i].service_logo}
+                  login_link={extFamilyService[i].login_link}
                 />
               );
             }
@@ -46,7 +48,7 @@ function ServicesPage(props) {
           });
       })
       .catch((err) => console.log(err));
-  }, [services]);
+  }, []);
 
   return (
     <div className='d-flex'>

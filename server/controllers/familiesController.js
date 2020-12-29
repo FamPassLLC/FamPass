@@ -153,8 +153,8 @@ familiesController.addMember = (req, res, next) => {
 };
 // removes a user from a family - pass local_user and family_name
 familiesController.removeMember = (req, res, next) => {
-  // get data from body and put into variables - body will include family name and local username of user to remove
-  const { family_name, local_user } = req.body;
+  // get data from params and put into variables - body will include family name and local username of user to remove
+  const { family_name, local_user } = req.params;
   // first queries - get family_id and user_id corresponding to input data
   // get _id from families table
   const firstQuery1 = `SELECT _id FROM families WHERE (family_name = $1)`;
@@ -173,6 +173,7 @@ familiesController.removeMember = (req, res, next) => {
         const memberInfo = [family_id, local_user_id];
         db.query(finalQuery, memberInfo).then(() => {
           res.locals.status = 'family member removed';
+          res.locals.data = req.params;
           return next();
         });
       });
@@ -188,12 +189,14 @@ familiesController.removeMember = (req, res, next) => {
 // body should include family name, service, local_user
 familiesController.shareService = (req, res, next) => {
   const { family_name, service, local_user } = req.body;
+
   // first, queries to obtain family_id and service_login_id
   const firstQuery1 = 'SELECT _id FROM families WHERE (family_name = $1)'; // will get family id
   const firstQuery1Value = [family_name];
   db.query(firstQuery1, firstQuery1Value)
     .then((data) => {
       const family_id = data.rows[0]._id;
+
       const firstQuery2 =
         'SELECT _id FROM service_login WHERE (service = $1 AND local_user = $2)';
       const firstQuery2Values = [service, local_user];
@@ -214,9 +217,9 @@ familiesController.shareService = (req, res, next) => {
 };
 
 // stop sharing a service with a family
-// body should include family name, service, local_user
+// params should include family name, service, local_user
 familiesController.stopSharingService = (req, res, next) => {
-  const { family_name, service, local_user } = req.body;
+  const { family_name, service, local_user } = req.params;
   // first, queries to obtain family_id and service_login_id
   const firstQuery1 = 'SELECT _id FROM families WHERE (family_name = $1)'; // will get family id
   const firstQuery1Value = [family_name];

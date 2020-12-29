@@ -23,17 +23,6 @@ function SideBar(props) {
   //   .catch(err => console.log(err));
   // }, []);
 
-  //after logged in, extract username from db
-  const [userName, setUserName] = useState('');
-  // useEffect(() => {
-  //   axios
-  //   .get('')
-  //   .then(result => {
-  //     setUserName(result.data);
-  //   })
-  //   .catch(err => console.log(err));
-  // }, []);
-
   //extract total number of user profile icons
   const [totalUsers, setTotalUsers] = useState([]);
   // useEffect(() => {

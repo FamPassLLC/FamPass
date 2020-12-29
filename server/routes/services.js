@@ -33,7 +33,7 @@ router.put(
 );
 
 router.delete(
-  '/delete-service-password',
+  '/delete-service-password/',
   servicesController.deleteServicesLogin,
   (req, res) => {
     console.log(res.locals.status);
