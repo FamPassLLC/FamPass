@@ -3,6 +3,7 @@ let password = null;
 let hidePassword = false;
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  //if popup is trying to login
   if (request.type === "login") {
     fetch('http://localhost:8080/api/users/signin', {
       method: 'POST',
@@ -25,7 +26,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
       })
   }
-  //login status for popup.js
+  //when popup.js opens it checks it's logged in status
   if (request.type === 'loginStatus') {
     if (username !== null) {
       sendResponse({loggedIn: true})
@@ -34,7 +35,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({loggedIn: false})
     }
   }
-  //login request from content.js
+  //service username/password request from content.js
   if (request.type === 'requestInfo') {
     if (username !== null) {
       fetch('http://localhost:8080/api/services/loginInfoExt', {
@@ -56,6 +57,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({loginStatus: false})
     }
   }
+  //if the website should be opened and closed quickly to delete save password prompt from google chrome
   if (request.type === 'hidePassword') {
     if (hidePassword) {
       hidePassword = false; 

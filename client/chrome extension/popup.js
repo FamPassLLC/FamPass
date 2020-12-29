@@ -24,7 +24,7 @@ function verifyUser() {
         document.getElementById('login').remove()
         document.getElementById('logoText').innerHTML = ('Hi ' + username + '!').toUpperCase()
       }
-      //add something for else
+      //add something for invalid password
     }
   );
 }

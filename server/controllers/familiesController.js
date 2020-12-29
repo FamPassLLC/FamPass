@@ -122,6 +122,7 @@ familiesController.addMember = (req, res, next) => {
             const firstQuery2 = `SELECT _id FROM local_users WHERE (username = $1)`;
             const firstQuery2Value = [local_user];
             db.query(firstQuery2, firstQuery2Value).then((data2) => {
+              console.log(data2.rows)
               const local_user_id = data2.rows[0]._id;
 
               // next query: check whether family already contains the specified member

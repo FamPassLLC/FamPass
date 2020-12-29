@@ -41,8 +41,6 @@ function LoginPage(props) {
           redirectToHome();
           props.setLocalUser(state);
 
-          //memory of logged in username to persist
-          // console.log(sessionStorage.getItem('loggedInUser'))
         }
       });
     } else {
@@ -52,7 +50,7 @@ function LoginPage(props) {
   const redirectToHome = () => {
     history.push('/home');
   };
-  // sign up button needs to be added to page and given this function
+
   return (
     <div
       id='loginbackground'

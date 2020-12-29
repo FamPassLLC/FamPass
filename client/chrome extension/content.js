@@ -24,7 +24,7 @@ if (serviceLinks[link]) {
   })
 }
 
-//check if we need to kill tab and reopen same tab
+//check if we need to kill tab and reopen same tab to avoid google chrome password save prompt
 if (hidePasswordLinks[link]) {
 chrome.runtime.sendMessage({type: 'hidePassword', link}, (response) => {
 })

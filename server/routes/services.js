@@ -41,7 +41,7 @@ router.delete(
   }
 );
 
-// TO ADD: (1) REQUEST TO GET LOGIN INFO
+//route for extension to request user/password
 router.post('/loginInfoExt', servicesController.getLoginExt, (req, res) => {
   const userInfo = res.locals.userInfo;
   console.log(userInfo)

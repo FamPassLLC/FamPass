@@ -50,6 +50,7 @@ function FamilyServices(props) {
         .catch((err) => console.log(err));
     }, 2000);
   };
+  //we send every single family to front-end and then filtered, THIS SHOULD BE FILTERED ON BACKEND and then sent to frontend
   const handleRemoveService = (e) => {
     e.preventDefault();
     const family_name = props.family_name;

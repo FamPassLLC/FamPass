@@ -5,9 +5,6 @@ import axios from 'axios';
 import Image from 'react-bootstrap/Image';
 
 function ServicesDisplay(props) {
-  useEffect(() => {
-    console.log('props', props);
-  });
 
   return (
     <div id='serviceProviders' className='d-flex'>

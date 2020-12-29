@@ -68,6 +68,7 @@ function FamilyPage(props) {
 
   const handleJoinFamily = (e) => {
     e.preventDefault();
+    const local_user = props.local_user.username;
     axios
       .post('/api/families/add-family-member', {
         family_name,
