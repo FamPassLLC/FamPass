@@ -4,7 +4,7 @@ Summary
 In this scratch-project, FamPass allows users to share accounts from a centralized website without exposing their real passwords.
 
 How to use
-Load the google chrome extension, and connect the DB model to this url postgres://ywpebare:hE4WAGTj0qfMUbhdLWW-ysotmzDRduM7@suleiman.db.elephantsql.com:5432/ywpebare
+Load the google chrome extension, and connect the DB model to this url "postgres://ywpebare:hE4WAGTj0qfMUbhdLWW-ysotmzDRduM7@suleiman.db.elephantsql.com:5432/ywpebare"
 Start the server, and create a user. From there either create a family or join a family by inputting  family’s unique name and password. Add services by using the plus service icon, etc.
 
 Technologies used: 
